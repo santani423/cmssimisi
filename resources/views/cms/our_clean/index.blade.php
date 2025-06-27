@@ -105,7 +105,7 @@
                                     <td>{{ $index + 1 }}</td>
                                     <td>
                                         @if ($item->img)
-                                            <img src="{{ asset('storage/'.$item->img) }}" width="50" height="50" class="rounded-circle" alt="Logo">
+                                            <img src="{{ asset($item->img) }}" width="50" height="50" class="rounded-circle" alt="Logo">
                                         @endif
                                     </td>
                                     <td>{{ $item->name }}</td>

@@ -38,7 +38,7 @@ class OurCleanController extends Controller
             $file = $request->file('img');
             $filename = uniqid() . '_' . $file->getClientOriginalName();
             $file->move(public_path('ourcleans'), $filename);
-            $validated['img'] = 'ourClean/' . $filename;
+            $validated['img'] = 'ourcleans/' . $filename;
         }
 
         OurClean::create($validated);
@@ -75,7 +75,10 @@ class OurCleanController extends Controller
             if ($ourClean->img) {
                 Storage::disk('public')->delete($ourClean->img);
             }
-            $validated['img'] = $request->file('img')->store('ourcleans', 'public');
+            $file = $request->file('img');
+            $filename = uniqid() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('ourcleans'), $filename);
+            $validated['img'] = 'ourcleans/' . $filename;
         }
 
         $ourClean->update($validated);

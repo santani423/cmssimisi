@@ -59,8 +59,12 @@ class BannerController extends Controller
         try {
             $image_path = 'assets/item/group126.png';
             if ($request->hasFile('image_path')) {
+                // $file = $request->file('image_path');
+                // $image_path = 'storage/' . $file->store('uploads/banner', 'public');
                 $file = $request->file('image_path');
-                $image_path = 'storage/' . $file->store('uploads/banner', 'public');
+                $filename = uniqid() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('banners'), $filename);
+                $image_path = 'banners/' . $filename;
             }
             $banner = new Banner();
             $banner->title = $request->input('title');
@@ -84,9 +88,12 @@ class BannerController extends Controller
                 $subBanner = new SubBannerImage();
                 $subBanner->banner_id = $banner->id;
                 $subBanner->path_img = 'assets/item/group126.png';
-                if ($request->hasFile('sub_banner_images_' . $i)) {
-                    $file = $request->file('sub_banner_images_' . $i);
-                    $subBanner->path_img = 'storage/' . $file->store('uploads/banner', 'public');
+                if ($request->hasFile('sub_banner_' . $i)) {
+                    $file = $request->file('sub_banner_' . $i);
+                    // $subBanner->path_img = 'storage/' . $file->store('uploads/banner', 'public');
+                    $filename = uniqid() . '_' . $file->getClientOriginalName();
+                    $file->move(public_path('sub_banner_' . $i), $filename);
+                    $subBanner->path_img = 'sub_banner_' . $i . '/' . $filename;
                 }
                 $subBanner->save();
             }
