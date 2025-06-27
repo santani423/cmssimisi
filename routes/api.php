@@ -51,7 +51,7 @@ Route::delete('/ruang-media/{ruangMedia}', [RuangMediaController::class, 'destro
 Route::get('/banner', [BannerController::class, 'index'])->name('banner.index');
 Route::post('/banner', [BannerController::class, 'store'])->name('banner.store');
 Route::get('/banner/{ruangMedia}', [BannerController::class, 'show'])->name('banner.show');
-Route::post('/banner/update/{ruangMedia}', [BannerController::class, 'update'])->name('banner.update');
+Route::put('/banner/{ruangMedia}', [BannerController::class, 'update'])->name('banner.update');
 Route::delete('/banner/{ruangMedia}', [BannerController::class, 'destroy'])->name('banner.destroy'); 
 
 Route::get('/setting', [SettingController::class, 'index'])->name('api.setting.index');

@@ -84,7 +84,7 @@ class BannerController extends Controller
             //     }
             // }
 
-            for ($i = 1; $i < 3; $i++) {
+            for ($i = 1; $i <= 3; $i++) {
                 $subBanner = new SubBannerImage();
                 $subBanner->banner_id = $banner->id;
                 $subBanner->path_img = 'assets/item/group126.png';
@@ -142,12 +142,25 @@ class BannerController extends Controller
         // ]);
 
         try {
+            //  return response()->json([
+            //     'message' => 'Banner updated successfully',
+            //     'data' => $request->all(),
+            // ], 500);
             $banner = Banner::where('id', $id)->first();
+            if (!$banner) {
+                return response()->json([
+                    'message' => 'Banner not found',
+                ], 404);
+            }
+
             $image_path = $banner->image_path;
             if ($request->hasFile('image_path')) {
                 $file = $request->file('image_path');
-                $image_path = 'storage/' . $file->store('uploads/banner', 'public');
+                $filename = uniqid() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('banners'), $filename);
+                $image_path = 'banners/' . $filename;
             }
+
             $banner->title = $request->input('title');
             $banner->image_path = $image_path;
             $banner->discover_more = $request->input('discover_more');
@@ -155,27 +168,29 @@ class BannerController extends Controller
             $banner->is_active = $request->input('is_active');
             $banner->save();
 
-            // Handle sub-banner images if provided
-            // if ($request->has('sub_banner_images')) {
-            //     foreach ($request->input('sub_banner_images') as $subImage) {
-            //         $banner->subBannerImages()->create([
-            //             'path_img' => $subImage['path_img'],
-            //         ]);
-            //     }
-            // }
-
-            foreach ($banner->SubBannersImage as $i => $subImage) {
-                if ($request->hasFile('sub_banner_' . $subImage->id)) {
-                    $file = $request->file('sub_banner_' . $subImage->id);
-                    $subImage->path_img = 'storage/' . $file->store('uploads/banner', 'public');
+            // Update sub-banner images
+            $subBanners = SubBannerImage::where('banner_id', $banner->id)->get();
+            for ($i = 1; $i <= 3; $i++) {
+                $subBanner = $subBanners[$i - 1] ?? null;
+                if (!$subBanner) {
+                    $subBanner = new SubBannerImage();
+                    $subBanner->banner_id = $banner->id;
                 }
-                $subImage->save();
+                $subBanner->path_img = 'assets/item/group126.png';
+                if ($request->hasFile('sub_banner_' . $i)) {
+                    // dd(99);
+                    $file = $request->file('sub_banner_' . $i);
+                    $filename = uniqid() . '_' . $file->getClientOriginalName();
+                    $file->move(public_path('sub_banner_' . $i), $filename);
+                    $subBanner->path_img = 'sub_banner_' . $i . '/' . $filename;
+                }
+                $subBanner->save();
             }
 
             return response()->json([
-                'message' => 'Banner update successfully',
+                'message' => 'Banner updated successfully',
                 'data' => $banner,
-            ], 201);
+            ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Failed to update banner',
