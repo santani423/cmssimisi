@@ -106,16 +106,25 @@
         <div class="tab">Informasi Utama:
             <div class="form-group">
                 <label for="paket_id">Jenis Paket *</label>
-                <input type="text" class="form-control"  id="typePaket_id" value="{{$typePaket->name}}"
-                placeholder="typePaket" required disabled>
+                <input type="text" class="form-control" id="typePaket_id" value="{{ $typePaket->name }}"
+                    placeholder="typePaket" required disabled>
             </div>
 
             <div class="form-group">
-                <input type="hidden" name="wilayah_id"  value="{{$wilayah->id}}">
-                <input type="hidden" name="paket_id"  value="{{$typePaket->id}}">
+                <input type="hidden" name="jenis_paket_id" value="{{ $JenisPaket->id }}">
+                <input type="hidden" name="paket_id" value="{{ $typePaket->id }}">
+                <label for="jenis_paket_id">Type *</label>
+                <input type="text" class="form-control" id="jenis_paket_id" value="{{ $JenisPaket->name }}"
+                    placeholder="type" required disabled>
+            </div>
+            <div class="form-group">
                 <label for="wilayah_id">Wilayah *</label>
-                <input type="text"  class="form-control"   id="wilayah_id" value="{{$wilayah->name}}"
-                    placeholder="Wilayah" required disabled>
+                <select name="wilayah_id" id="wilayah_id" class="form-control" required>
+
+                    @foreach ($wilayah as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-group">
@@ -165,7 +174,8 @@
 
             <div class="form-group">
                 <label for="start_date_departure">Tanggal Mulai Keberangkatan *</label>
-                <input type="date" class="form-control" name="start_date_departure" id="start_date_departure" required>
+                <input type="date" class="form-control" name="start_date_departure" id="start_date_departure"
+                    required>
             </div>
             <div class="form-group">
                 <label for="end_date_departure">Tanggal Akhir Keberangkatan *</label>
@@ -173,12 +183,12 @@
             </div>
         </div>
 
-        <div class="tab"> 
+        <div class="tab">
             <div class="form-group">
                 <label>Transportasi</label>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="transportation_ticket" id="transportation_ticket"
-                        value="1">
+                    <input type="checkbox" class="form-check-input" name="transportation_ticket"
+                        id="transportation_ticket" value="1">
                     <label class="form-check-label" for="transportation_ticket">Termasuk Tiket Transportasi</label>
                 </div>
             </div>

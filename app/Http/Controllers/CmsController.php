@@ -67,7 +67,8 @@ class CmsController extends Controller
 
     function paketCreate(Request $request, $code)
     {
-        $wilayah = Wilayah::where('code', $code)->first();
+        $JenisPaket = JenisPaket::where('code', $code)->first();
+        $wilayah = Wilayah::all();
         // dd($wilayah);
         $typePaket = TypePaket::where('code', $request->jenis)->first();
         $ItemDesc = ItemDesc::query()
@@ -80,7 +81,7 @@ class CmsController extends Controller
 
 
 
-        return view('cms.paket.create', compact('code', 'wilayah', 'ItemDesc', 'typePaket'));
+        return view('cms.paket.create', compact('code', 'JenisPaket', 'wilayah', 'ItemDesc', 'typePaket'));
     }
 
     function paketStore(Request $request)
@@ -98,12 +99,19 @@ class CmsController extends Controller
             $thumbnailPath = 'assets/item/group126.png';
             if ($request->hasFile('thumbnail_img')) {
                 $file = $request->file('thumbnail_img');
-                $thumbnailPath = $file->store('uploads/thumbnails', 'public');
+                // $thumbnailPath = $file->store('uploads/thumbnails', 'public');
+
+                $filename = uniqid() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('thumbnail_imgs'), $filename);
+                $thumbnailPath = 'thumbnail_imgs/' . $filename;
             }
             $pdf = 'assets/item/sempel.pdf';
             if ($request->hasFile('pdf')) {
                 $file = $request->file('pdf');
-                $pdf = $file->store('uploads/pdf', 'public');
+                // $pdf = $file->store('uploads/pdf', 'public');
+                $filename = uniqid() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('pdf'), $filename);
+                $pdf = 'pdf/' . $filename;
             }
 
             $typePaket = TypePaket::where('id', $request->paket_id)->first();
@@ -119,10 +127,11 @@ class CmsController extends Controller
             $paket = new Paket();
             $paket->wilayah_id = $request->wilayah_id;
             $paket->type_paket_id = $request->paket_id;
+            $paket->jenis_paket_id = $request->jenis_paket_id;
             $paket->minimal_orang = $request->minimal_orang;
             $paket->name = $request->name;
-            $paket->thumbnail_img = 'storage/' . $thumbnailPath;
-            $paket->pdf = 'storage/' . $pdf;
+            $paket->thumbnail_img =  $thumbnailPath;
+            $paket->pdf =  $pdf;
             $paket->start_date_departure = $request->start_date_departure;
             $paket->end_date_departure = $request->end_date_departure;
             // $paket->hotel_bintang_1 = $request->hotel_bintang_1 ? 1 : 0;
@@ -148,8 +157,8 @@ class CmsController extends Controller
                 $item->desc = $request->deskripsi[$key];
                 $item->save();
             }
-            $wilayah = Wilayah::where('id', $request->wilayah_id)->first();
-            return redirect()->route('cms.paket', $wilayah->code)->with('success', 'Paket successfully created');
+            $jenis = JenisPaket::where('id', $request->jenis_paket_id)->first();
+            return redirect()->route('cms.paket.jenis.paket', $jenis->code)->with('success', 'Paket successfully created');
             // return response()->json([
             //     'success' => true,
             //     'data' => $paket, 
