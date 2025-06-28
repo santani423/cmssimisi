@@ -39,7 +39,7 @@ class BannerController extends Controller
         $banner = Banner::where('code', $banner)->first();
         return view('cms.banner.create');
     }
-
+ 
     /**
      * Show the form for editing the specified resource.
      */
