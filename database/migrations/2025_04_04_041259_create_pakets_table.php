@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('pakets', function (Blueprint $table) {
             $table->id();
             $table->integer('wilayah_id');  
-            $table->integer('type_paket_id');  
+            $table->integer('type_paket_id')->nullable();  
+            $table->integer('jenis_paket_id')->nullable();  
             $table->string('thumbnail_img');
             $table->string('pdf')->nullable();
             $table->string('name');

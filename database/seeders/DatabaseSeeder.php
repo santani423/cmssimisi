@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(itemDescSeeder::class);
         $this->call(SetItemDesPaketSeeder::class);
         // $this->call(TypePaketSeeder::class);
+        $this->call(JenisPaket::class);
         // $this->call(PaketSeeder::class);
         $this->call(BlogSeed::class);
         $this->call(Bannerseeder::class);
