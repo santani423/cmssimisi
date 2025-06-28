@@ -36,4 +36,66 @@ class OurCleanController extends Controller
             ], 500);
         }
     }
+
+    public function show($id)
+    {
+        try {
+            $ourClean = OurClean::find($id);
+
+            if (!$ourClean) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'OurClean not found',
+                ], 404);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'OurClean detail retrieved successfully',
+                'data' => $ourClean,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve OurClean detail',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $ourClean = OurClean::find($id);
+
+            if (!$ourClean) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'OurClean not found',
+                ], 404);
+            }
+
+            $validatedData = $request->validate([
+                // Sesuaikan field berikut dengan kolom pada tabel OurClean
+                'nama' => 'sometimes|string|max:255',
+                'deskripsi' => 'sometimes|string',
+                'wilayah_id' => 'sometimes|integer',
+                // tambahkan validasi field lain sesuai kebutuhan
+            ]);
+
+            $ourClean->update($validatedData);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'OurClean updated successfully',
+                'data' => $ourClean,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update OurClean',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }

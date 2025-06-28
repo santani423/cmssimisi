@@ -58,6 +58,8 @@ Route::delete('/banner/{ruangMedia}', [BannerController::class, 'destroy'])->nam
 
 
 Route::get('/our_clean', [OurCleanController::class, 'index'])->name('our_clean.index'); 
+Route::get('/our_clean/{id}', [OurCleanController::class, 'show'])->name('our_clean.show'); 
+Route::put('/our_clean/update/{id}', [OurCleanController::class, 'update'])->name('our_clean.update'); 
 
 
 
