@@ -60,6 +60,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/cms/ruang_media/store', [CmsController::class, 'ruangMediaStore'])->name('cms.ruang.media.store');
     Route::get('/cms/ruang_media/edit/{code}', [CmsController::class, 'ruangMediaEdit'])->name('cms.ruang.media.edit');
 
+    Route::get('/cms/paket/jenis-paket/{code}', [CmsController::class, 'jenisPaket'])->name('cms.paket.jenis.paket');
+
     Route::get('/cms/Banner', [BannerController::class, 'index'])->name('cms.banner');
     Route::get('/cms/Banner/create', [BannerController::class, 'create'])->name('cms.banner.create');
     Route::get('/cms/Banner/edit/{banner}', [BannerController::class, 'edit'])->name('cms.banner.edit');

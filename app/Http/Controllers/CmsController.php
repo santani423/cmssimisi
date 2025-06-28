@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ItemDesc;
 use App\Models\ItemDescPaket;
+use App\Models\JenisPaket;
 use App\Models\Paket;
 use App\Models\RuangMedia;
 use App\Models\TypePaket;
@@ -75,7 +76,7 @@ class CmsController extends Controller
             ->where('type_pakets.code', $request->jenis)
             ->select('item_descs.*')
             ->get();
-            // dd($ItemDesc);
+        // dd($ItemDesc);
 
 
 
@@ -89,7 +90,7 @@ class CmsController extends Controller
         // dd($request->all());
 
         try {
-           
+
             // return response()->json([
             //     'success' => true,     
             //     'message' => 'Paket successfully created',
@@ -148,7 +149,7 @@ class CmsController extends Controller
                 $item->save();
             }
             $wilayah = Wilayah::where('id', $request->wilayah_id)->first();
-            return redirect()->route('cms.paket', $wilayah->code )->with('success', 'Paket successfully created');
+            return redirect()->route('cms.paket', $wilayah->code)->with('success', 'Paket successfully created');
             // return response()->json([
             //     'success' => true,
             //     'data' => $paket, 
@@ -186,12 +187,12 @@ class CmsController extends Controller
             $thumbnailPath = $paket->thumbnail_img;
             if ($request->hasFile('thumbnail_img')) {
                 $file = $request->file('thumbnail_img');
-                $thumbnailPath = 'storage/' .$file->store('uploads/thumbnails', 'public');
+                $thumbnailPath = 'storage/' . $file->store('uploads/thumbnails', 'public');
             }
             $pdf =  $paket->pdf;
             if ($request->hasFile('pdf')) {
                 $file = $request->file('pdf');
-                $pdf = 'storage/' .$file->store('uploads/pdf', 'public');
+                $pdf = 'storage/' . $file->store('uploads/pdf', 'public');
             }
 
             $typePaket = TypePaket::where('id', $request->paket_id)->first();
@@ -204,7 +205,7 @@ class CmsController extends Controller
                 ], 400);
             }
 
-           
+
             $paket->wilayah_id = $request->wilayah_id;
             $paket->type_paket_id = $request->paket_id;
             $paket->minimal_orang = $request->minimal_orang;
@@ -230,12 +231,12 @@ class CmsController extends Controller
             //     'data' => $request->item_desc_id,
             // ], 201);
             foreach ($request->item_desc_id as $key => $itemDescId) {
-                $item =  ItemDescPaket::where('id', $request->item_desc_id[$key])->first(); 
+                $item =  ItemDescPaket::where('id', $request->item_desc_id[$key])->first();
                 $item->desc = $request->deskripsi[$key];
                 $item->save();
             }
             $wilayah = Wilayah::where('id', $paket->wilayah_id)->first();
-            return redirect()->route('cms.paket', $wilayah->code )->with('success', 'Paket successfully created');
+            return redirect()->route('cms.paket', $wilayah->code)->with('success', 'Paket successfully created');
             // return response()->json([
             //     'success' => true,
             //     'data' => $paket, 
@@ -259,18 +260,18 @@ class CmsController extends Controller
     }
 
     function paketEdit($code)
-    { 
-       
+    {
+
         $paket = Paket::where('code', $code)->first();
-        
+
         $typePaket = TypePaket::where('id', $paket->type_paket_id)->first();
         $wilayah = Wilayah::where('id', $paket->wilayah_id)->first();
         $ItemDesc = ItemDesc::query()
-        ->join('item_desc_pakets as idp', 'idp.item_desc_id', '=', 'item_descs.id') 
-        ->where('idp.paket_id', $typePaket->id)
-        ->select('item_descs.name as item_desc_name','idp.*')
-        ->get();
-        
+            ->join('item_desc_pakets as idp', 'idp.item_desc_id', '=', 'item_descs.id')
+            ->where('idp.paket_id', $typePaket->id)
+            ->select('item_descs.name as item_desc_name', 'idp.*')
+            ->get();
+
         return view('cms.paket.edit', compact('code', 'wilayah', 'ItemDesc', 'paket', 'typePaket'));
     }
     function paketShow($code)
@@ -334,5 +335,11 @@ class CmsController extends Controller
         $user->save();
 
         return redirect()->route('profile')->with('success', 'Profile updated successfully.');
+    }
+
+    function jenisPaket($code)
+    {
+        $JenisPaket = JenisPaket::where('code', $code)->first();
+        return view('cms.paket.index', compact('code', 'JenisPaket'));
     }
 }

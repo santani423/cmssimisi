@@ -29,6 +29,7 @@ class paketStudySeeder extends Seeder
         $paket->code = 'ST-A-1D';
         $paket->thumbnail_img = 'assets/item/group126.png';
         $paket->type_paket_id = $typePaket->id;
+        $paket->jenis_paket_id = rand(1, 2);
         $paket->start_date_departure = now()->addDays(rand(1, 30))->format('Y-m-d');
         $paket->end_date_departure = now()->addDays(rand(31, 60))->format('Y-m-d');
         $paket->wilayah_id = 1;
@@ -54,6 +55,7 @@ class paketStudySeeder extends Seeder
         $paket->code = 'ST-B-1D';
         $paket->thumbnail_img = 'assets/item/group126.png';
         $paket->type_paket_id = $typePaket->id;
+        $paket->jenis_paket_id = rand(1, 2);
         $paket->start_date_departure = now()->addDays(rand(1, 30))->format('Y-m-d');
         $paket->end_date_departure = now()->addDays(rand(31, 60))->format('Y-m-d');
         $paket->wilayah_id = 1;
@@ -80,6 +82,7 @@ class paketStudySeeder extends Seeder
         $paket->code = 'ST-C-1D';
         $paket->thumbnail_img = 'assets/item/group126.png';
         $paket->type_paket_id = $typePaket->id;
+        $paket->jenis_paket_id = rand(1, 2);
         $paket->start_date_departure = now()->addDays(rand(1, 30))->format('Y-m-d');
         $paket->end_date_departure = now()->addDays(rand(31, 60))->format('Y-m-d');
         $paket->wilayah_id = 1;
@@ -107,6 +110,7 @@ class paketStudySeeder extends Seeder
         $paket->code = 'ST-A-2D';
         $paket->thumbnail_img = 'assets/item/group126.png';
         $paket->type_paket_id = $typePaket->id;
+        $paket->jenis_paket_id = rand(1, 2);
         $paket->start_date_departure = now()->addDays(rand(1, 30))->format('Y-m-d');
         $paket->end_date_departure = now()->addDays(rand(31, 60))->format('Y-m-d');
         $paket->wilayah_id = 1;
@@ -133,6 +137,7 @@ class paketStudySeeder extends Seeder
         $paket->code = 'ST-B-2D';
         $paket->thumbnail_img = 'assets/item/group126.png';
         $paket->type_paket_id = $typePaket->id;
+        $paket->jenis_paket_id = rand(1, 2);
         $paket->start_date_departure = now()->addDays(rand(1, 30))->format('Y-m-d');
         $paket->end_date_departure = now()->addDays(rand(31, 60))->format('Y-m-d');
         $paket->wilayah_id = 1;
@@ -159,6 +164,7 @@ class paketStudySeeder extends Seeder
         $paket->code = 'ST-C-2D';
         $paket->thumbnail_img = 'assets/item/group126.png';
         $paket->type_paket_id = $typePaket->id;
+        $paket->jenis_paket_id = rand(1, 2);
         $paket->start_date_departure = now()->addDays(rand(1, 30))->format('Y-m-d');
         $paket->end_date_departure = now()->addDays(rand(31, 60))->format('Y-m-d');
         $paket->wilayah_id = 1;
@@ -185,6 +191,7 @@ class paketStudySeeder extends Seeder
         $paket->code = 'ST-D-2D';
         $paket->thumbnail_img = 'assets/item/group126.png';
         $paket->type_paket_id = $typePaket->id;
+        $paket->jenis_paket_id = rand(1, 2);
         $paket->start_date_departure = now()->addDays(rand(1, 30))->format('Y-m-d');
         $paket->end_date_departure = now()->addDays(rand(31, 60))->format('Y-m-d');
         $paket->wilayah_id = 1;
@@ -211,6 +218,7 @@ class paketStudySeeder extends Seeder
         $paket->code = 'ST-C-2D';
         $paket->thumbnail_img = 'assets/item/group126.png';
         $paket->type_paket_id = $typePaket->id;
+        $paket->jenis_paket_id = rand(1, 2);
         $paket->start_date_departure = now()->addDays(rand(1, 30))->format('Y-m-d');
         $paket->end_date_departure = now()->addDays(rand(31, 60))->format('Y-m-d');
         $paket->wilayah_id = 1;
@@ -236,6 +244,7 @@ class paketStudySeeder extends Seeder
         $paket->code = 'ST-F-2D';
         $paket->thumbnail_img = 'assets/item/group126.png';
         $paket->type_paket_id = $typePaket->id;
+        $paket->jenis_paket_id = rand(1, 2);
         $paket->start_date_departure = now()->addDays(rand(1, 30))->format('Y-m-d');
         $paket->end_date_departure = now()->addDays(rand(31, 60))->format('Y-m-d');
         $paket->wilayah_id = 1;
@@ -261,6 +270,7 @@ class paketStudySeeder extends Seeder
         $paket->code = 'ST-G-2D';
         $paket->thumbnail_img = 'assets/item/group126.png';
         $paket->type_paket_id = $typePaket->id;
+        $paket->jenis_paket_id = rand(1, 2);
         $paket->start_date_departure = now()->addDays(rand(1, 30))->format('Y-m-d');
         $paket->end_date_departure = now()->addDays(rand(31, 60))->format('Y-m-d');
         $paket->wilayah_id = 1;
@@ -286,6 +296,7 @@ class paketStudySeeder extends Seeder
         $paket->code = 'ST-2D-1N';
         $paket->thumbnail_img = 'assets/item/group126.png';
         $paket->type_paket_id = $typePaket->id;
+        $paket->jenis_paket_id = rand(1, 2);
         $paket->start_date_departure = now()->addDays(rand(1, 30))->format('Y-m-d');
         $paket->end_date_departure = now()->addDays(rand(31, 60))->format('Y-m-d');
         $paket->wilayah_id = 1;
@@ -313,6 +324,7 @@ class paketStudySeeder extends Seeder
         $paket->code = 'ST-3D-1N';
         $paket->thumbnail_img = 'assets/item/group126.png';
         $paket->type_paket_id = $typePaket->id;
+        $paket->jenis_paket_id = rand(1, 2);
         $paket->start_date_departure = now()->addDays(rand(1, 30))->format('Y-m-d');
         $paket->end_date_departure = now()->addDays(rand(31, 60))->format('Y-m-d');
         $paket->wilayah_id = 1;
@@ -339,6 +351,7 @@ class paketStudySeeder extends Seeder
         $paket->code = 'ST-3D-2N';
         $paket->thumbnail_img = 'assets/item/group126.png';
         $paket->type_paket_id = $typePaket->id;
+        $paket->jenis_paket_id = rand(1, 2);
         $paket->start_date_departure = now()->addDays(rand(1, 30))->format('Y-m-d');
         $paket->end_date_departure = now()->addDays(rand(31, 60))->format('Y-m-d');
         $paket->wilayah_id = 1;
@@ -367,6 +380,7 @@ DESA WISATA YOGYAKARTA
         $paket->code = 'ST-4D-2N';
         $paket->thumbnail_img = 'assets/item/group126.png';
         $paket->type_paket_id = $typePaket->id;
+        $paket->jenis_paket_id = rand(1, 2);
         $paket->start_date_departure = now()->addDays(rand(1, 30))->format('Y-m-d');
         $paket->end_date_departure = now()->addDays(rand(31, 60))->format('Y-m-d');
         $paket->wilayah_id = 1;

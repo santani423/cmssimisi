@@ -12,7 +12,7 @@
                             data-target="#choosePaketModal">Add Paket</a>
                     </div>
                     <div class="body">
-                        <h1>{{ $wilayah->name }}</h1>
+                        <h1>{{ $JenisPaket->name }}</h1>
                         @if (session('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('success') }}
@@ -27,7 +27,8 @@
                                     <th>No</th>
                                     <th>Thumbnail</th>
                                     <th>Nama</th>
-                                    <th>Paket</th>
+                                    <th>Type Paket</th>
+                                    <th>Wilayah</th>
                                     <th>Departure</th>
                                     <th>Transportation</th>
                                     <th>Price</th>
@@ -102,7 +103,7 @@
                     method: 'GET',
                     data: {
                         page: page,
-                        wilayah_id: '{{ $code }}',
+                        jenis_pakets: '{{ $code }}',
                     },
                 }).done(function(response) {
                     const data = response?.data?.data || [];
@@ -122,6 +123,7 @@
                                 <td><img src="/${item.thumbnail_img || '{{ asset('assets/item/Maskgroup.png') }}'}" alt="thumbnail_img" width="100"></td>
                                 <td>${item.name || '-'}</td>
                                 <td>${item?.type_paket?.name || 'Unknown'}</td>
+                                <td>${item?.wilayah?.name || 'Unknown'}</td>
                                 <td>${item.start_date_departure ? new Date(item.start_date_departure).toLocaleString('default', { month: 'long', year: 'numeric' }) : '-'} - ${item.end_date_departure ? new Date(item.end_date_departure).toLocaleString('default', { month: 'long', year: 'numeric' }) : '-'}</td>
                                 <td>${item.transportation_ticket ? '<span class="text-success">Include</span>' : '<span class="text-danger">Exclude</span>'}</td>
                                 <td>${item.price || '-'}</td> 

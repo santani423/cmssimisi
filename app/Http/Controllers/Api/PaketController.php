@@ -35,6 +35,11 @@ class PaketController extends Controller
                 $query->join('wilayahs', 'pakets.wilayah_id', '=', 'wilayahs.id')
                     ->where('wilayahs.code', $request->input('wilayah_id'));
             }
+
+            if ($request->has('jenis_paket_id') && $request->input('jenis_paket_id') != null) {
+                $query->join('jenis_pakets', 'pakets.jenis_paket_id', '=', 'jenis_pakets.id')
+                    ->where('jenis_pakets.code', $request->input('jenis_paket_id'));
+            }
             
             $typePaket = TypePaket::where('code', $request->type_paket)->first();
             // dd($typePaket);
