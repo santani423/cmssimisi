@@ -100,32 +100,41 @@
 @endsection
 
 @section('content')
-    <form id="regForm" action="{{ url('cms/paket/update') }}/{{$code}}" method="post" enctype="multipart/form-data">
+    <form id="regForm" action="{{ url('cms/paket/update') }}/{{ $code }}" method="post"
+        enctype="multipart/form-data">
         <h1>Tambah Paket Baru</h1>
         @csrf
         <div class="tab">Informasi Utama:
             <div class="form-group">
                 <label for="paket_id">Jenis Paket *</label>
-                <input type="text" class="form-control"  id="typePaket_id" value="{{$typePaket->name}}"
-                placeholder="typePaket" required disabled>
+                {{-- <input type="text" class="form-control"  id="typePaket_id" value="{{$typePaket->name}}"
+                placeholder="typePaket" required disabled> --}}
+                <select name="typePaket_id" id="typePaket_id" class="form-control">
+                    <option value="{{ $typePaket->id }}">{{ $typePaket->name }}</option>
+                    @foreach ($typePaketList as $typePaketItem)
+                        @if ($typePaketItem->id != $typePaket->id)
+                            <option value="{{ $typePaketItem->id }}">{{ $typePaketItem->name }}</option>
+                        @endif
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-group">
-                <input type="hidden" name="wilayah_id"  value="{{$wilayah->id}}">
-                <input type="hidden" name="paket_id"  value="{{$typePaket->id}}">
+                <input type="hidden" name="wilayah_id" value="{{ $wilayah->id }}">
+                <input type="hidden" name="paket_id" value="{{ $typePaket->id }}">
                 <label for="wilayah_id">Wilayah *</label>
-                <input type="text"  class="form-control"   id="wilayah_id" value="{{$wilayah->name}}"
+                <input type="text" class="form-control" id="wilayah_id" value="{{ $wilayah->name }}"
                     placeholder="Wilayah" required disabled>
             </div>
 
             <div class="form-group">
                 <label for="pdf">File PDF *</label>
-                <input type="file" class="form-control" name="pdf" id="pdf" accept=".pdf"  >
+                <input type="file" class="form-control" name="pdf" id="pdf" accept=".pdf">
                 <small class="text-danger">Format file harus PDF.</small>
             </div>
             <div class="form-group">
                 <label for="thumbnail_img">Gambar Thumbnail *</label>
-                <input type="file" class="form-control" name="thumbnail_img" id="thumbnail_img" accept="image/*" 
+                <input type="file" class="form-control" name="thumbnail_img" id="thumbnail_img" accept="image/*"
                     onchange="previewImage(event)">
                 <small class="text-danger" id="thumbnail_error" style="display: none;">Tipe file tidak valid.</small>
             </div>
@@ -160,32 +169,35 @@
 
             <div class="form-group">
                 <label for="name">Nama Paket *</label>
-                <input type="text" class="form-control" name="name" id="name" placeholder="Nama Paket" required value="{{ $paket->name }}">
+                <input type="text" class="form-control" name="name" id="name" placeholder="Nama Paket" required
+                    value="{{ $paket->name }}">
             </div>
 
             <div class="form-group">
                 <label for="start_date_departure">Tanggal Mulai Keberangkatan *</label>
-                <input type="date" class="form-control" name="start_date_departure" id="start_date_departure" required value="{{ $paket->start_date_departure }}">
+                <input type="date" class="form-control" name="start_date_departure" id="start_date_departure" required
+                    value="{{ $paket->start_date_departure }}">
             </div>
             <div class="form-group">
                 <label for="end_date_departure">Tanggal Akhir Keberangkatan *</label>
-                <input type="date" class="form-control" name="end_date_departure" id="end_date_departure" required value="{{ $paket->end_date_departure }}">    
+                <input type="date" class="form-control" name="end_date_departure" id="end_date_departure" required
+                    value="{{ $paket->end_date_departure }}">
             </div>
         </div>
 
-        <div class="tab"> 
+        <div class="tab">
             <div class="form-group">
                 <label>Transportasi</label>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="transportation_ticket" id="transportation_ticket"
-                        value="1" {{ $paket->transportation_ticket ? 'checked' : '' }}>
+                    <input type="checkbox" class="form-check-input" name="transportation_ticket"
+                        id="transportation_ticket" value="1" {{ $paket->transportation_ticket ? 'checked' : '' }}>
                     <label class="form-check-label" for="transportation_ticket">Termasuk Tiket Transportasi</label>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="description">Deskripsi</label>
-                <textarea class="form-control" name="description" id="description" rows="4">{!!$paket->description!!}</textarea>
+                <textarea class="form-control" name="description" id="description" rows="4">{!! $paket->description !!}</textarea>
             </div>
 
             <div class="form-group">
@@ -205,7 +217,8 @@
                         <span class="input-group-text">Rp</span>
                     </div>
                     <input type="text" class="form-control" name="price" id="price"
-                        placeholder="Contoh: 2.500.000" required oninput="formatRupiah(this)" value="{{ number_format($paket->price, 0, ',', '.') }}">
+                        placeholder="Contoh: 2.500.000" required oninput="formatRupiah(this)"
+                        value="{{ number_format($paket->price, 0, ',', '.') }}">
                 </div>
             </div>
         </div>
@@ -216,7 +229,7 @@
                 <fieldset>
                     <div class="card">
                         <div class="body">
-                            <textarea class="summernote" name="deskripsi[]">{!!$id->desc !!}</textarea>
+                            <textarea class="summernote" name="deskripsi[]">{!! $id->desc !!}</textarea>
                         </div>
                     </div>
                 </fieldset>

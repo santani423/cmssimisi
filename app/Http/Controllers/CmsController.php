@@ -274,6 +274,9 @@ class CmsController extends Controller
         $paket = Paket::where('code', $code)->first();
 
         $typePaket = TypePaket::where('id', $paket->type_paket_id)->first();
+        $typePaketList = TypePaket::all();
+
+
         $wilayah = Wilayah::where('id', $paket->wilayah_id)->first();
         $ItemDesc = ItemDesc::query()
             ->join('item_desc_pakets as idp', 'idp.item_desc_id', '=', 'item_descs.id')
@@ -281,7 +284,14 @@ class CmsController extends Controller
             ->select('item_descs.name as item_desc_name', 'idp.*')
             ->get();
 
-        return view('cms.paket.edit', compact('code', 'wilayah', 'ItemDesc', 'paket', 'typePaket'));
+        return view('cms.paket.edit', compact(
+            'code',
+            'wilayah', 
+            'ItemDesc', 
+            'paket', 
+            'typePaket',
+            'typePaketList',
+        ));
     }
     function paketShow($code)
     {
