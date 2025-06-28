@@ -8,9 +8,17 @@
             <div class="swiper-wrapper">
                 @foreach ($banner as $item)
                     <div class="slider-home1 relative overflow-hidden swiper-slide"
-                        style="background-image: url({{ asset('assets/slide/slide.png') }}); background-size: cover; background-position: center;">
-
-                        <div class="slider-content">
+                        style="background-color: #eaeaea;">
+                        <img src="{{ asset($item->image_path) }}"
+                            alt="{{ $item->title }}"
+                            style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; pointer-events: none; user-select: none;"
+                            loading="lazy"
+                            fetchpriority="high"
+                            decoding="async"
+                            onload="this.style.opacity=1"
+                            onerror="this.style.display='none';"
+                        >
+                        <div class="slider-content" style="position: relative; z-index: 1;">
                             <div class="tf-container">
                                 <div class="row">
                                     <div class="col-lg-8">
@@ -36,7 +44,7 @@
                                                     @foreach ($item->SubBannersImage as $image)
                                                         <div class="col-6 col-sm-6 col-lg-3 mt-4">
                                                             <img src="{{ asset($image->path_img) }}" alt=""
-                                                                width="100%" height="100%">
+                                                                width="100%" height="100%" loading="lazy" decoding="async">
                                                         </div>
                                                     @endforeach
                                                 </div>
