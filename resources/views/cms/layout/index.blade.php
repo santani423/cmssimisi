@@ -454,9 +454,9 @@
                 .then(data => {
                     const container = $('#nav-paket-list');
 
-                    if (data?.data?.data) {
+                    if (data?.data) {
                         let html = '';
-                        data.data.data.forEach(item => {
+                        data.data.forEach(item => {
                             console.log('Processing item:', item);
                             html +=
                                 `<li><a href="${route('cms/paket/jenis-paket', { code: item.code })}">${item.name}</a></li>`;

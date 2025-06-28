@@ -213,7 +213,7 @@
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="paketDropdown${type.id}">`;
                         (typePaket || []).forEach(function(paket) {
-                            html += `<li><a class="dropdown-item" href="/paket/${paket.code}">${paket.name}</a></li>`;
+                            html += `<li><a class="dropdown-item" href="/paket_jenis?type_paket=${paket.code}&jenis_paket=${type.code}">${paket.name}</a></li>`;
                         });
                         html += `</ul></li>`;
                     });

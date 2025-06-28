@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisPaket;
 use App\Models\Paket;
 use App\Models\PaketTurUmum;
+use App\Models\TypePaket;
 use App\Models\Wilayah;
 use Illuminate\Http\Request;
 
@@ -12,12 +14,16 @@ class PaketTurUmumController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-       $wilayah = Wilayah::all();
-        return view('paketTurUmum.index', compact('wilayah'));
+
+        $wilayah = Wilayah::all();
+        $jenisPaket = JenisPaket::where('code', $request->jenis_paket)->first();
+        $typePaket = TypePaket::where('code', $request->type_paket)->first();
+        $wilayah_id = $request->wilayah_id ?? '';
+        return view('paketTurUmum.index', compact('wilayah', 'jenisPaket', 'typePaket', 'wilayah_id'));
     }
-     
+
     /**
      * Show the form for creating a new resource.
      */
@@ -28,7 +34,7 @@ class PaketTurUmumController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     */                                                                                                               
+     */
     public function store(Request $request)
     {
         //
@@ -39,10 +45,10 @@ class PaketTurUmumController extends Controller
      */
     public function show($code)
     {
-        $paket = Paket::where('code',$code)->first();
+        $paket = Paket::where('code', $code)->first();
         // dd($paket);
-      
-        return view('paketTurUmum.detail',compact('paket'));
+
+        return view('paketTurUmum.detail', compact('paket'));
     }
 
     /**

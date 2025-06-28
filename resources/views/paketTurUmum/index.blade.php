@@ -6,11 +6,11 @@
         <div class="tf-container">
             <div class="row">
                 <div class="col-lg-12 center z-index1">
-                    <h1 class="title">Paket Tour Umum</h1>
-                    <ul class="breadcumb-list flex-five">
+                    <h1 class="title">Paket {{$jenisPaket->name}}</h1>
+                    {{-- <ul class="breadcumb-list flex-five">
                         <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><span>Paket Tour Umum</span></li>
-                    </ul>
+                        <li><span>{{$jenisPaket->name}}</span></li>
+                    </ul> --}}
                 </div>
             </div>
         </div>
@@ -18,52 +18,58 @@
 
     <section class="profile-dashboard">
         <div class="container">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-center">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Wilayah</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">{{$typePaket->name}}</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav1"
+                    aria-controls="navbarNav1" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav1">
+                    <ul class="navbar-nav">
+                        @foreach ($wilayah as $item)
                             <li class="nav-item">
-                                <a class="nav-link-item active" aria-current="page" href="#" data-id="">Semua</a>
+                                <a class="nav-link" href="/paket_jenis?type_paket={{ $typePaket->code }}&jenis_paket={{ $jenisPaket->code }}&wilayah_id={{$item->code}}">{{$item->name}}</a>
                             </li>
-                            @foreach ($wilayah as $wl)
-                                <li class="nav-item">
-                                    <a class="nav-link-item" href="#" data-id="{{ $wl->id }}">{{ $wl->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
+                        @endforeach
+
+
+                    </ul>
                 </div>
             </nav>
             <hr>
+
             <div class="row" id="paket-list">
                 <!-- Data akan dimuat melalui AJAX -->
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-12 d-flex justify-content-center">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination"></ul>
-                </nav>
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination"></ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </section>
 @endsection
 
 @section('script')
+    <!-- jQuery & Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
         $(document).ready(function() {
             function show(page = 1, wilayah_id = null) {
                 $.ajax({
-                    url: '/api/paket',
+                    url: '{{ route('api.paket.index') }}',
                     method: 'GET',
-                    data: { page: page, wilayah_id: wilayah_id },
+                    data: {
+                        page: page,
+                        jenis_paket_id: '{{ $jenisPaket->code }}',
+                        type_paket: '{{ $typePaket->code }}',
+                        wilayah_id: '{{ $wilayah_id }}',
+                    },
                 }).done(function(response) {
                     const data = response?.data?.data || [];
                     const currentPage = response?.data?.current_page || 1;
@@ -80,88 +86,43 @@
                                     </a>
                                     <div class="tour-listing-content">
                                         <span class="map">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt me-2" viewBox="0 0 16 16">
-                                                <path d="M12.166 8.94c-.26.35-.578.77-.927 1.23-.774.99-1.675 2.06-2.239 2.727a.58.58 0 0 1-.86 0c-.564-.667-1.465-1.737-2.239-2.727a31.634 31.634 0 0 1-.927-1.23C4.478 7.98 4 6.92 4 6a4 4 0 1 1 8 0c0 .92-.478 1.98-1.834 2.94zM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-geo-alt me-2" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M12.166 8.94c-.26.35-.578.77-.927 1.23-.774.99-1.675 2.06-2.239 2.727a.58.58 0 0 1-.86 0c-.564-.667-1.465-1.737-2.239-2.727a31.634 31.634 0 0 1-.927-1.23C4.478 7.98 4 6.92 4 6a4 4 0 1 1 8 0c0 .92-.478 1.98-1.834 2.94zM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
                                             </svg>
                                             ${item?.wilayah?.name || 'Unknown'}
                                         </span>
-                                       <h3 class="title-tour-list">
-                                              <p  
-                                                  style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; color: #000; font-weight: bold;">
-                                                  ${item.name}
-                                              </p>
-                                          </h3>
-                                       
+                                        <h3 class="title-tour-list">
+                                            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; color: #000; font-weight: bold;">
+                                                ${item.name}
+                                            </p>
+                                        </h3>
                                         <div class="row">
-                                                <div class="col-8">
-                                                    <p style="color: gray;">Start From</p>
-                                                    <h5 style="color: orange;">
-                                                        Rp. ${new Intl.NumberFormat('id-ID').format(item.price)}</h5>
-                                                    <h6 style="color: orange;">/Orang</h6>
-                                                </div>
-                                                <div class="col-4 d-flex justify-content-end align-items-center"
-                                                    style="text-align: right;">
-                                                    <a href="{{ route('paket.show', '') }}/${item.code}"
-                                                        class="tour-listing-image"> <img
-                                                            src="{{ asset('assets/item/Group74.svg') }}" alt=""
-                                                            style="width: 50px; height: 50px;"> </a>
-                                                </div>
+                                            <div class="col-8">
+                                                <p style="color: gray;">Start From</p>
+                                                <h5 style="color: orange;">Rp. ${new Intl.NumberFormat('id-ID').format(item.price)}</h5>
+                                                <h6 style="color: orange;">/Orang</h6>
                                             </div>
+                                            <div class="col-4 d-flex justify-content-end align-items-center" style="text-align: right;">
+                                                <a href="{{ route('paket.show', '') }}/${item.code}" class="tour-listing-image">
+                                                    <img src="{{ asset('assets/item/Group74.svg') }}" alt="" style="width: 50px; height: 50px;">
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>`;
-                        // const html = `<div class="swiper-slide">
-                        //             <div class="tour-listing box-sd">
-                        //                 <a href="{{ route('paket.show', '') }}/${item.code}" class="tour-listing-image">
-
-                        //                     <img src="${item.thumbnail_img}" alt="Image Listing">
-
-                        //                 </a>
-                        //                 <div class="tour-listing-content">
-                        //                     <span class="map"> <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                        //                             height="16" fill="currentColor" class="bi bi-geo-alt me-2"
-                        //                             viewBox="0 0 16 16">
-                        //                             <path
-                        //                                 d="M12.166 8.94c-.26.35-.578.77-.927 1.23-.774.99-1.675 2.06-2.239 2.727a.58.58 0 0 1-.86 0c-.564-.667-1.465-1.737-2.239-2.727a31.634 31.634 0 0 1-.927-1.23C4.478 7.98 4 6.92 4 6a4 4 0 1 1 8 0c0 .92-.478 1.98-1.834 2.94zM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-                        //                         </svg>
-                        //                           ${item?.wilayah?.name || 'Unknown'}</span>
-                        //                     <h3 class="title-tour-list">
-                        //                         <p  
-                        //                             style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; color: #000; font-weight: bold;">
-                        //                             ${item.name}
-                        //                         </p>
-                        //                     </h3>
-
-                                            
-                        //                     <div class="row">
-                        //                         <div class="col-8">
-                        //                             <p style="color: gray;">Start From</p>
-                        //                             <h5 style="color: orange;">
-                        //                                 ${item.price}</h5>
-                        //                             <h6 style="color: orange;">/Orang</h6>
-                        //                         </div>
-                        //                         <div class="col-4 d-flex justify-content-end align-items-center"
-                        //                             style="text-align: right;">
-                        //                             <a href="{{ route('paket.show', '') }}/${item.code}"
-                        //                                 class="tour-listing-image"> <img
-                        //                                     src="{{ asset('assets/item/Group74.svg') }}" alt=""
-                        //                                     style="width: 50px; height: 50px;"> </a>
-                        //                         </div>
-                        //                     </div>
-                        //                 </div>
-                        //             </div>
-                        //         </div>`
                         container.append(html);
                     });
 
-                    // Update pagination
+                    // Pagination
                     const paginationContainer = $('.pagination');
                     paginationContainer.empty();
 
                     let startPage = Math.max(currentPage - 2, 1);
                     let endPage = Math.min(currentPage + 2, lastPage);
 
-                    // Tombol Previous
                     if (currentPage > 1) {
                         paginationContainer.append(`
                             <li class="page-item">
@@ -170,7 +131,6 @@
                         `);
                     }
 
-                    // Halaman Dinamis
                     for (let i = startPage; i <= endPage; i++) {
                         paginationContainer.append(`
                             <li class="page-item ${i === currentPage ? 'active' : ''}">
@@ -179,7 +139,6 @@
                         `);
                     }
 
-                    // Tombol Next
                     if (currentPage < lastPage) {
                         paginationContainer.append(`
                             <li class="page-item">
@@ -192,36 +151,30 @@
                 });
             }
 
-            // Handle pagination click + Scroll ke atas
             $(document).on('click', '.pagination .page-link', function(e) {
                 e.preventDefault();
                 const page = $(this).data('page');
                 const wilayah_id = $('.nav-link-item.active').data('id');
                 if (page) {
                     show(page, wilayah_id);
-
-                    // Scroll ke atas dengan efek animasi
                     $('html, body').animate({
                         scrollTop: $('#paket-list').offset().top - 100
                     }, 500);
                 }
             });
 
-            // Handle wilayah click
             $(document).on('click', '.nav-link-item', function(e) {
                 e.preventDefault();
                 $('.nav-link-item').removeClass('active');
                 $(this).addClass('active');
                 const wilayah_id = $(this).data('id');
                 show(1, wilayah_id);
-
-                // Scroll ke atas dengan efek animasi
                 $('html, body').animate({
                     scrollTop: $('#paket-list').offset().top - 100
                 }, 500);
             });
 
-            show(); // Load data on page load
+            show(); // Load on page load
         });
     </script>
 @endsection
