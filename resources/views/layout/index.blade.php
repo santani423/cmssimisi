@@ -200,16 +200,19 @@
                     url: '{{ route('paket.jenis-paket') }}',
                     method: 'GET',
                 }).done(function(response) {
-                    let typePaket = (response.data && response.data.data) ? response.data.data : [];
+                    let jenisPaket = (response.data && response.data) ? response.data : [];
+                    let typePaket = (response.data && response.typePakets) ? response.typePakets : [];
+                    console.log('typePaket',jenisPaket);
+                    
                     let html = '';
-                    typePaket.forEach(function(type) {
+                    jenisPaket.forEach(function(type) {
                         html += `<li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle active" href="#" id="paketDropdown${type.id}"
                                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         ${type.name}
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="paketDropdown${type.id}">`;
-                        (type.pakets || []).forEach(function(paket) {
+                        (typePaket || []).forEach(function(paket) {
                             html += `<li><a class="dropdown-item" href="/paket/${paket.code}">${paket.name}</a></li>`;
                         });
                         html += `</ul></li>`;
