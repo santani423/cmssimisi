@@ -106,10 +106,24 @@
         @csrf
         <div class="tab">Informasi Utama:
             <div class="form-group">
-                <label for="paket_id">Jenis Paket *</label>
+                <label for="jenis_paket_id">Jenis Paket *</label>
                 {{-- <input type="text" class="form-control"  id="typePaket_id" value="{{$typePaket->name}}"
                 placeholder="typePaket" required disabled> --}}
-                <select name="typePaket_id" id="typePaket_id" class="form-control">
+                <select name="jenis_paket_id" id="jenis_paket_id" class="form-control">
+                    <option value="{{ $jenisPaket->id }}">{{ $jenisPaket->name }}</option>
+                    @foreach ($jenisPaketList as $jenisPaketItem)
+                        @if ($jenisPaketItem->id != $jenisPaket->id)
+                            <option value="{{ $jenisPaketItem->id }}">{{ $jenisPaketItem->name }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="paket_id">Type Paket *</label>
+                {{-- <input type="text" class="form-control"  id="typePaket_id" value="{{$typePaket->name}}"
+                placeholder="typePaket" required disabled> --}}
+                <select name="paket_id" id="paket_id" class="form-control">
                     <option value="{{ $typePaket->id }}">{{ $typePaket->name }}</option>
                     @foreach ($typePaketList as $typePaketItem)
                         @if ($typePaketItem->id != $typePaket->id)
@@ -120,12 +134,20 @@
             </div>
 
             <div class="form-group">
-                <input type="hidden" name="wilayah_id" value="{{ $wilayah->id }}">
-                <input type="hidden" name="paket_id" value="{{ $typePaket->id }}">
-                <label for="wilayah_id">Wilayah *</label>
-                <input type="text" class="form-control" id="wilayah_id" value="{{ $wilayah->name }}"
-                    placeholder="Wilayah" required disabled>
+                <label for="paket_id">Wilayah *</label>
+                {{-- <input type="text" class="form-control"  id="typePaket_id" value="{{$typePaket->name}}"
+                placeholder="typePaket" required disabled> --}}
+                <select name="wilayah_id" id="wilayah_id" class="form-control">
+                    <option value="{{ $wilayah->id }}">{{ $wilayah->name }}</option>
+                    @foreach ($wilayahList as $wilayahItem)
+                        @if ($wilayahItem->id != $typePaket->id)
+                            <option value="{{ $wilayahItem->id }}">{{ $wilayahItem->name }}</option>
+                        @endif
+                    @endforeach
+                </select>
             </div>
+
+
 
             <div class="form-group">
                 <label for="pdf">File PDF *</label>

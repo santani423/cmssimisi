@@ -189,6 +189,7 @@ class CmsController extends Controller
 
         try {
             $paket = Paket::where('code', $code)->first();
+            // dd($paket);
             // return response()->json([
             //     'success' => true,     
             //     'message' => 'Paket successfully created',
@@ -196,12 +197,16 @@ class CmsController extends Controller
             $thumbnailPath = $paket->thumbnail_img;
             if ($request->hasFile('thumbnail_img')) {
                 $file = $request->file('thumbnail_img');
-                $thumbnailPath = 'storage/' . $file->store('uploads/thumbnails', 'public');
+                $filename = uniqid() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('thumbnail_imgs'), $filename);
+                $thumbnailPath = 'thumbnail_imgs/' . $filename;
             }
             $pdf =  $paket->pdf;
             if ($request->hasFile('pdf')) {
                 $file = $request->file('pdf');
-                $pdf = 'storage/' . $file->store('uploads/pdf', 'public');
+                $filename = uniqid() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('pdf'), $filename);
+                $pdf = 'pdf/' . $filename;
             }
 
             $typePaket = TypePaket::where('id', $request->paket_id)->first();
@@ -214,9 +219,9 @@ class CmsController extends Controller
                 ], 400);
             }
 
-
             $paket->wilayah_id = $request->wilayah_id;
             $paket->type_paket_id = $request->paket_id;
+            $paket->jenis_paket_id = $request->jenis_paket_id;
             $paket->minimal_orang = $request->minimal_orang;
             $paket->name = $request->name;
             $paket->thumbnail_img = $thumbnailPath;
@@ -229,11 +234,12 @@ class CmsController extends Controller
             // $paket->hotel_bintang_4 = $request->hotel_bintang_4 ? 1 : 0;
             // $paket->hotel_bintang_5 = $request->hotel_bintang_5 ? 1 : 0;
             $paket->transportation_ticket = $request->transportation_ticket ? 1 : 0;
-            $paket->code = $request->code . '_' . $request->wilayah_id . '_' . date('YmdHis') . '_' . rand(1000, 9999);
+            // $paket->code = $request->code . '_' . $request->wilayah_id . '_' . date('YmdHis') . '_' . rand(1000, 9999);
             $paket->description = $request->description ?? null;
             $paket->price = (int) $request->price;
-
+            
             $paket->save();
+            // dd($request->jenis_paket_id);
 
             // return response()->json([ 
             //     'message' => 'Paket successfully created',
@@ -244,8 +250,8 @@ class CmsController extends Controller
                 $item->desc = $request->deskripsi[$key];
                 $item->save();
             }
-            $wilayah = Wilayah::where('id', $paket->wilayah_id)->first();
-            return redirect()->route('cms.paket', $wilayah->code)->with('success', 'Paket successfully created');
+            $jenis = JenisPaket::where('id', $request->jenis_paket_id)->first();
+            return redirect()->route('cms.paket.jenis.paket', $jenis->code)->with('success', 'Paket successfully update');
             // return response()->json([
             //     'success' => true,
             //     'data' => $paket, 
@@ -276,8 +282,12 @@ class CmsController extends Controller
         $typePaket = TypePaket::where('id', $paket->type_paket_id)->first();
         $typePaketList = TypePaket::all();
 
+        $jenisPaket = JenisPaket::where('id', $paket->jenis_paket_id)->first();
+        $jenisPaketList = JenisPaket::all();
+
 
         $wilayah = Wilayah::where('id', $paket->wilayah_id)->first();
+        $wilayahList = Wilayah::all();
         $ItemDesc = ItemDesc::query()
             ->join('item_desc_pakets as idp', 'idp.item_desc_id', '=', 'item_descs.id')
             ->where('idp.paket_id', $typePaket->id)
@@ -287,10 +297,13 @@ class CmsController extends Controller
         return view('cms.paket.edit', compact(
             'code',
             'wilayah', 
+            'wilayahList',
             'ItemDesc', 
             'paket', 
             'typePaket',
             'typePaketList',
+            'jenisPaket',
+            'jenisPaketList',
         ));
     }
     function paketShow($code)

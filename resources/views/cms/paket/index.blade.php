@@ -103,7 +103,7 @@
                     method: 'GET',
                     data: {
                         page: page,
-                        jenis_pakets: '{{ $code }}',
+                        jenis_paket_id: '{{ $code }}',
                     },
                 }).done(function(response) {
                     const data = response?.data?.data || [];
