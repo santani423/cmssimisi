@@ -197,7 +197,7 @@
 
             function paket() {
                 $.ajax({
-                    url: '{{ route('api.type-paket') }}',
+                    url: '{{ route('paket.jenis-paket') }}',
                     method: 'GET',
                 }).done(function(response) {
                     let typePaket = (response.data && response.data.data) ? response.data.data : [];
