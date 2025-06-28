@@ -10,7 +10,7 @@
                     <a href="{{ route('cms.banner.create') }}" class="btn btn-primary float-right">Add Ruang Media</a>
                 </div>
                 <div class="body">
-                    <h4>Starter Page</h4>
+               
                     <table class="table table-striped">
                         <thead>
                             <tr>

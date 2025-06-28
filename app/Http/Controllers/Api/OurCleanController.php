@@ -16,8 +16,6 @@ class OurCleanController extends Controller
 
             $query = OurClean::query();
 
-             
-
             $query->orderBy('created_at', 'desc');
 
             $ourClean = $query->paginate($size, ['*'], 'page', $page);
@@ -94,6 +92,33 @@ class OurCleanController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to update OurClean',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $ourClean = OurClean::find($id);
+
+            if (!$ourClean) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'OurClean not found',
+                ], 404);
+            }
+
+            $ourClean->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'OurClean deleted successfully',
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete OurClean',
                 'error' => $e->getMessage(),
             ], 500);
         }

@@ -29,19 +29,22 @@
                         @include('cms.our_clean._modal_edit')
 
                         {{-- Modal Hapus --}}
-                        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog">
+                        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog"
+                            aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Konfirmasi Hapus</h5>
-                                        <button type="button" class="close"
-                                            data-dismiss="modal"><span>&times;</span></button>
+                                    <div class="modal-header bg-danger text-white">
+                                        <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Hapus</h5>
+                                        <button type="button" class="close text-white" data-dismiss="modal"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
                                     <div class="modal-body">
-                                        Apakah Anda yakin ingin menghapus data ini?
+                                        Apakah Anda yakin ingin menghapus paket ini?
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                                         <button type="button" class="btn btn-danger" id="deleteConfirmBtn">Hapus</button>
                                     </div>
                                 </div>
@@ -86,7 +89,7 @@
 
             function show(page = 1) {
                 $.ajax({
-                    url: '{{ route('our_clean.index') }}',
+                    url: '/api/our_clean',
                     method: 'GET',
                     data: {
                         page: page
@@ -97,14 +100,16 @@
                     const lastPage = response?.data?.last_page || 1;
                     const container = $('#tableOurClean');
                     container.empty();
-
+            
+                    // Use server-rendered asset path for default image
+                    const defaultImg = "{{ asset('assets/item/Maskgroup.png') }}";
+            
                     if (data.length === 0) {
                         container.append(
                             '<tr><td colspan="9" class="text-center">No data available</td></tr>');
                     } else {
                         data.forEach(function(item, index) {
-                            const imgSrc = item.img ? `/${item.img}` :
-                                "{{ asset('assets/item/Maskgroup.png') }}";
+                            const imgSrc = item.img ? `/${item.img}` : defaultImg;
                             const status = item.is_active == 1 ?
                                 '<span class="badge badge-success">Aktif</span>' :
                                 '<span class="badge badge-secondary">Tidak Aktif</span>';
@@ -123,29 +128,28 @@
                             Edit
                         </button>
                                 
-                                <button class="btn btn-danger btn-sm btn-delete" data-code="${item.id}">Hapus</button>
+                                <button class="btn btn-danger btn-delete" data-code="${item.id}">Hapus</button>
                             </td>
                         </tr>`);
                         });
                     }
-                    //  <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-edit" data-id="${item.id}">Edit</a>
                     const paginationContainer = $('.pagination');
                     paginationContainer.empty();
                     let startPage = Math.max(currentPage - 2, 1);
                     let endPage = Math.min(currentPage + 2, lastPage);
-
+            
                     if (currentPage > 1) {
                         paginationContainer.append(
                             `<li class="page-item"><a class="page-link" href="#" data-page="${currentPage - 1}">«</a></li>`
                         );
                     }
-
+            
                     for (let i = startPage; i <= endPage; i++) {
                         paginationContainer.append(
                             `<li class="page-item ${i === currentPage ? 'active' : ''}"><a class="page-link" href="#" data-page="${i}">${i}</a></li>`
                         );
                     }
-
+            
                     if (currentPage < lastPage) {
                         paginationContainer.append(
                             `<li class="page-item"><a class="page-link" href="#" data-page="${currentPage + 1}">»</a></li>`
