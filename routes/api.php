@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\BannerController;
+use App\Http\Controllers\Api\JenisPaketController;
 use App\Http\Controllers\Api\PaketController;
 use App\Http\Controllers\Api\RuangMediaController;
 use App\Http\Controllers\Api\SettingController;
@@ -55,6 +56,7 @@ Route::get('/banner/{ruangMedia}', [BannerController::class, 'show'])->name('ban
 Route::put('/banner/{ruangMedia}', [BannerController::class, 'update'])->name('banner.update');
 Route::delete('/banner/{ruangMedia}', [BannerController::class, 'destroy'])->name('banner.destroy'); 
 
+Route::get('/jenis-paket', [JenisPaketController::class, 'index'])->name('banner.index');
 
 
 Route::get('/our_clean', [OurCleanController::class, 'index'])->name('our_clean.index'); 

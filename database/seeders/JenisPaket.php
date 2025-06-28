@@ -13,11 +13,10 @@ class JenisPaket extends Seeder
      */
     public function run(): void
     {
-       DB::table('jenis_pakets')->insert([
-            ['name' => 'LDKS', 'code' => 'LDKS'],
-            ['name' => 'Study Tour', 'code' => 'ST'],
-            ['name' => 'Outbound', 'code' => 'OB'],
-            ['name' => 'Wisata', 'code' => 'WS'], 
-        ]);
+    
+    DB::table('jenis_pakets')->insert([
+        ['name' => 'Paket Umum', 'code' => 'UMUM'],
+        ['name' => 'Paket Pelajar', 'code' => 'PELAJAR'],
+    ]);
     }
 }

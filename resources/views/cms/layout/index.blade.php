@@ -449,7 +449,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            fetch('/api/wilayah')
+            fetch('/api/type-paket')
                 .then(response => response.json())
                 .then(data => {
                     const container = $('#nav-paket-list');
