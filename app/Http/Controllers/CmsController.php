@@ -7,6 +7,7 @@ use App\Models\ItemDescPaket;
 use App\Models\JenisPaket;
 use App\Models\Paket;
 use App\Models\RuangMedia;
+use App\Models\SewaTransportasi;
 use App\Models\TypePaket;
 use App\Models\User;
 use App\Models\Wilayah;
@@ -16,7 +17,10 @@ class CmsController extends Controller
 {
     public function index()
     {
-        return view('cms.index');
+        $paketCount = Paket::count();
+        $sewaKendaraanCount = SewaTransportasi::count();
+        $ruangMediaCount = RuangMedia::count();
+        return view('cms.index', compact('paketCount','sewaKendaraanCount','ruangMediaCount'));
     }
 
     public function create()
