@@ -111,8 +111,7 @@
                                             <td>{{ $index + 1 }}</td>
                                             <td>
                                                 @if ($item->foto)
-                                                    <img src="{{ asset(  $item->foto) }}" alt="Foto"
-                                                        width="80">
+                                                    <img src="{{ asset($item->foto) }}" alt="Foto" width="80">
                                                 @else
                                                     <span class="text-muted">Tidak ada foto</span>
                                                 @endif
@@ -215,8 +214,8 @@
                                 </tbody>
                             </table>
                         </div>
-                         <hr>
-         
+                        <hr>
+
                         <!-- End Table -->
                     </div>
                 </div>
@@ -232,7 +231,10 @@
                 $.ajax({
                     url: '{{ route('api.transportasi') }}',
                     method: 'GET',
-                    data: { page: page, wilayah_id: wilayah_id },
+                    data: {
+                        page: page,
+                        wilayah_id: wilayah_id
+                    },
                 }).done(function(response) {
                     const data = response?.data?.data || [];
                     const currentPage = response?.data?.current_page || 1;
@@ -338,4 +340,3 @@
         });
     </script>
 @endsection
-

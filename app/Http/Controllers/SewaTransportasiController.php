@@ -49,8 +49,11 @@ class SewaTransportasiController extends Controller
 
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
-            $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $validated['foto'] = $file->storeAs('sewa_transportasi', $filename, 'public');
+            // $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
+            // $validated['foto'] = $file->storeAs('sewa_transportasi', $filename, 'public');
+            $filename = uniqid() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('sewa_transportasis'), $filename);
+            $validated['foto'] = 'sewa_transportasis/' . $filename;
         }
 
         SewaTransportasi::create($validated);
@@ -101,8 +104,9 @@ class SewaTransportasiController extends Controller
                 Storage::disk('public')->delete($sewaTransportasi->foto);
             }
             $file = $request->file('foto');
-            $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $validated['foto'] = $file->storeAs('sewa_transportasi', $filename, 'public');
+            $filename = uniqid() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('sewa_transportasis'), $filename);
+            $validated['foto'] = 'sewa_transportasis/' . $filename;
         }
 
         $sewaTransportasi->update($validated);

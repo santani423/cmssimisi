@@ -43,7 +43,10 @@ class RuangMediaController extends Controller
             $thumbnailPath = 'assets/item/group126.png';
             if ($request->hasFile('thumbnail_img')) {
                 $file = $request->file('thumbnail_img');
-                $thumbnailPath = 'storage/' .$file->store('uploads/thumbnails', 'public');
+                // $thumbnailPath = 'storage/' .$file->store('uploads/thumbnails', 'public');
+                $filename = uniqid() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('thumbnail_imgs'), $filename);
+                $thumbnailPath = 'thumbnail_imgs/' . $filename;
             }
              
             $ruangMedia = new RuangMedia();
@@ -96,7 +99,10 @@ class RuangMediaController extends Controller
             $thumbnailPath = $ruangMedia->thumbnail_img;
             if ($request->hasFile('thumbnail_img')) {
                 $file = $request->file('thumbnail_img');
-                $thumbnailPath = 'storage/' .$file->store('uploads/thumbnails', 'public');
+                
+                $filename = uniqid() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('thumbnail_imgs'), $filename);
+                $thumbnailPath = 'thumbnail_imgs/' . $filename;
             }
              
              
