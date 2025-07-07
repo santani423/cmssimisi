@@ -37,7 +37,7 @@
                                     <li class="nav-item dropdown" id="paketDropdownWrapper">
                                         <a class="nav-link dropdown-toggle active" href="#" id="paketDropdown"
                                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Paket Tur-
+                                            Paket 
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="paketDropdown">
                                             <li><a class="dropdown-item" href="#">Paket Domestik</a></li>
@@ -46,7 +46,7 @@
                                     <li><a href="{{ route('ruang-media.index') }}" class="nav-link active" aria-current="page">Ruang Media</a></li>
                                     <li><a href="{{ route('sewa.transportasi') }}" class="nav-link active" aria-current="page">Sewa Transportasi</a></li>
                                     <li><a href="{{ route('tes.timoni') }}" class="nav-link active" aria-current="page">Testimoni</a></li>
-                                    <li><a href="{{ route('about.as') }}" class="nav-link active" aria-current="page">Tentang Kami</a></li>
+                                    <li><a href="{{ route('about.as') }}" class="nav-link active" aria-current="page">Tentang Kami---</a></li>
                                 </ul>
                             </div>
                         </div>
