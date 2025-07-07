@@ -37,7 +37,7 @@
                                     <li class="nav-item dropdown" id="paketDropdownWrapper">
                                         <a class="nav-link dropdown-toggle active" href="#" id="paketDropdown"
                                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Paket Tur
+                                            Paket Tur-
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="paketDropdown">
                                             <li><a class="dropdown-item" href="#">Paket Domestik</a></li>
