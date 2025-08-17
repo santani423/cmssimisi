@@ -3,7 +3,7 @@
 @section('content')
     <!-- Widget Offer Package -->
     <!-- Widget Slider -->
-    <section class="slider relative">
+    {{-- <section class="slider relative">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 @foreach ($banner as $item)
@@ -63,8 +63,38 @@
                 <div class="swiper-button-prev  prev-home1"></div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- Widget Slider -->
+
+    <section class="slider position-relative w-100" style="height: 100vh;">
+    <div class="swiper mySwiper w-100 h-100">
+        <div class="swiper-wrapper">
+            @foreach ($banner as $item)
+                <div class="slider-home1 position-relative overflow-hidden swiper-slide w-100 h-100"
+                    style="background-color: #eaeaea;">
+
+                    <img src="{{ asset($item->image_path) }}" alt="{{ $item->title }}"
+                        class="position-absolute top-0 start-0 w-100 h-100"
+                        style="object-fit: cover; z-index: 0; pointer-events: none; user-select: none;" 
+                        loading="lazy" fetchpriority="high" decoding="async" 
+                        onload="this.style.opacity=1" onerror="this.style.display='none';">
+
+                    <div class="slider-content position-relative z-1 h-100 d-flex align-items-center">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    {{-- Konten di sini --}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+
 
     <section class="team-member-page pd-main">
         <div class="tf-container">
@@ -335,7 +365,7 @@
                             {{ $item->name }}
                         </div>
                     </div>
-                @endforeach 
+                @endforeach
             </div>
         </div>
     </section>

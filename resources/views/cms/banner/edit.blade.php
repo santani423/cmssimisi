@@ -31,20 +31,20 @@
                         @csrf
                         @method('PUT')
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="title">Title <span class="text-danger">*</span></label>
                             <input type="text" name="title" id="title" class="form-control" value="{{ $banner->title }}" required>
                         </div>
                         <div class="form-group">
                             <label for="description">Description <span class="text-danger">*</span></label>
                             <textarea name="description" id="description" class="form-control" rows="4" required>{{ $banner->description }}</textarea>
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <label for="image_path">Main Banner Image <span class="text-danger">*</span></label>
                             <input type="file" name="image_path" id="image_path" class="form-control" accept="image/*" onchange="previewImage(this, '#main-banner-preview')">
                             <img id="main-banner-preview" src="{{ asset($banner->image_path) }}" alt="Main Banner Preview" style="display: block; margin-top: 10px; max-height: 200px;">
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="discover_more">Discover More URL <span class="text-danger">*</span></label>
                             <input type="text" name="discover_more" id="discover_more" class="form-control" value="{{ $banner->discover_more }}" required>
                         </div>
@@ -54,7 +54,7 @@
                             <input type="file" name="sub_banner_{{ $i + 1  }}" id="sub_banner_{{ $i }}" class="form-control" accept="image/*" onchange="previewImage(this, '#sub-banner-{{ $i }}-preview')">
                             <img id="sub-banner-{{ $i }}-preview" src="{{ asset($SubBannersImage->path_img) }}" alt="Sub Banner {{ $i + 1 }} Preview" style="display: block; margin-top: 10px; max-height: 200px;">
                         </div>
-                        @endforeach
+                        @endforeach --}}
                         <div class="form-group">
                             <label for="is_active">Is Active <span class="text-danger">*</span></label>
                             <select name="is_active" id="is_active" class="form-control" required>

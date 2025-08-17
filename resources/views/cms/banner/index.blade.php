@@ -6,8 +6,8 @@
         <div class="col-lg-12 col-md-12">
             <div class="card planned_task">
                 <div class="header">
-                    <h2>Ruang Media</h2>
-                    <a href="{{ route('cms.banner.create') }}" class="btn btn-primary float-right">Add Ruang Media</a>
+                    <h2>Banner</h2>
+                    <a href="{{ route('cms.banner.create') }}" class="btn btn-primary float-right">Add Banner</a>
                 </div>
                 <div class="body">
                
@@ -16,8 +16,8 @@
                             <tr>
                                 <th>No</th>
                                 <th>Thumbnail</th>
-                                <th>Nama</th> 
-                                <th>Sub</th> 
+                                {{-- <th>Nama</th> 
+                                <th>Sub</th>  --}}
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -86,12 +86,7 @@
                             <tr>
                                 <td>${(currentPage - 1) * data.length + index + 1}</td>
                                 <td><img src="/${item.image_path || '{{ asset('assets/item/Maskgroup.png') }}'}" alt="thumbnail_img" width="100"></td>
-                                <td>${item.title || '-'}</td> 
-                                <td>
-                                    ${item.sub_banners_image?.map(image => `
-                                        <img src="/${image?.path_img || '{{ asset('assets/item/Maskgroup.png') }}'}" alt="thumbnail_img" width="100">
-                                    `).join('') || '-'}
-                                </td>
+                                
                                 <td>
                                     <a href="/cms/Banner/edit/${item.code || '#'}" class="btn btn-primary">Edit</a>
                                     
