@@ -66,33 +66,34 @@
     </section> --}}
     <!-- Widget Slider -->
 
-    <section class="slider position-relative w-100" style="height: 100vh;">
-    <div class="swiper mySwiper w-100 h-100">
-        <div class="swiper-wrapper">
-            @foreach ($banner as $item)
-                <div class="slider-home1 position-relative overflow-hidden swiper-slide w-100 h-100"
-                    style="background-color: #eaeaea;">
+    <section class="slider position-relative w-100" style="height: auto;">
+        <div class="swiper mySwiper w-100">
+            <div class="swiper-wrapper">
+                @foreach ($banner as $item)
+                    <div class="slider-home1 position-relative overflow-hidden swiper-slide w-100"
+                        style="background-color: #eaeaea;">
 
-                    <img src="{{ asset($item->image_path) }}" alt="{{ $item->title }}"
-                        class="position-absolute top-0 start-0 w-100 h-100"
-                        style="object-fit: cover; z-index: 0; pointer-events: none; user-select: none;" 
-                        loading="lazy" fetchpriority="high" decoding="async" 
-                        onload="this.style.opacity=1" onerror="this.style.display='none';">
+                        <img src="{{ asset($item->image_path) }}" alt="{{ $item->title }}" class="d-block w-100"
+                            style="height: auto; object-fit: cover; pointer-events: none; user-select: none; transition: opacity .3s;"
+                            loading="lazy" fetchpriority="high" decoding="async" onload="this.style.opacity=1"
+                            onerror="this.style.display='none';">
 
-                    <div class="slider-content position-relative z-1 h-100 d-flex align-items-center">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    {{-- Konten di sini --}}
+                        <div
+                            class="slider-content position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center z-1">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        {{-- Konten di sini --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+
 
 
 
