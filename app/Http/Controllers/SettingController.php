@@ -13,12 +13,12 @@ class SettingController extends Controller
         if (!$settings) {
             $settings = new Setting();
             $settings->save();
-        } 
+        }
         return view('cms.setting.index', compact('settings'));
     }
 
     public function create()
-    { 
+    {
         return view('cms.setting.create');
     }
 
@@ -27,7 +27,8 @@ class SettingController extends Controller
         return view('cms.setting.edit', compact('setting'));
     }
 
-    function update(Request $request ) {
+    function update(Request $request)
+    {
         // dd($request->all());
         // $request->validate([
         //     'logo' => 'nullable|string|max:255',
@@ -66,7 +67,8 @@ class SettingController extends Controller
         //     'maintenance_mode' => 'nullable|string|max:255',
         //     'analytics' => 'nullable|string|max:255',
         // ]); 
-        try {   
+        try {
+            // dd($request->all());
             $settings = Setting::where('id', 1)->first();
             if (!$settings) {
                 $settings = new Setting();
@@ -116,24 +118,29 @@ class SettingController extends Controller
             $settings->google_map = $request->google_map;
             $settings->whatsapp = $request->whatsapp;
             $settings->instagram = $request->instagram;
-            $settings->facebook = $request->facebook;
+            // $settings->facebook = $request->facebook;
             $settings->twitter = $request->twitter;
             $settings->youtube = $request->youtube;
-            $settings->tiktok = $request->tiktok; 
+            $settings->tiktok = $request->tiktok;
             // dd($request->hasFile('logo'));
             if ($request->hasFile('logo')) {
-                $logoPath = $request->file('logo')->store('assets/logo', 'public');
-                $settings->logo = 'storage/'.$logoPath;
+                // $logoPath = $request->file('logo')->store('assets/logo', 'public');
+                // $settings->logo = 'storage/'.$logoPath;
+                $file = $request->file('logo');
+                $filename = uniqid() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('logo'), $filename);
+                $settings->logo = 'logo/' . $filename;
+                // dd($settings->logo);
             }
             if ($request->hasFile('favicon')) {
                 $faviconPath = $request->file('favicon')->store('assets/logo', 'public');
-                $settings->favicon = 'storage/'.$faviconPath;
+                $settings->favicon = 'storage/' . $faviconPath;
             }
             $settings->save();
             // dd($settings);
             return redirect()->route('cms.setting')->with(['success' => 'Settings updated successfully']);
         } catch (\Exception $e) {
-            // dd($e);
+            dd($e);
             return redirect()->back()->with(['error' => 'Failed to update settings: ' . $e->getMessage()]);
         }
     }
