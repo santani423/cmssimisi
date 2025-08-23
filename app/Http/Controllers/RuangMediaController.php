@@ -39,6 +39,9 @@ class RuangMediaController extends Controller
     {
         $ruangMedia = RuangMedia::where('code', $ruangMedia)->firstOrFail();
         // dd($ruangMedia);
+        if (!$ruangMedia) {
+            abort(404);
+        }
         return view('ruangMedia.detail',compact('ruangMedia'));
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JenisPaket;
 use App\Models\Paket;
 use App\Models\PaketTurUmum;
+use App\Models\Setting;
 use App\Models\TypePaket;
 use App\Models\Wilayah;
 use Illuminate\Http\Request;
@@ -46,9 +47,13 @@ class PaketTurUmumController extends Controller
     public function show($code)
     {
         $paket = Paket::where('code', $code)->first();
-        // dd($paket);
+        if (!$paket) {
+            abort(404);
+        }
 
-        return view('paketTurUmum.detail', compact('paket'));
+        $setting = Setting::first();
+        // dd($setting);
+        return view('paketTurUmum.detail', compact('paket', 'setting'));
     }
 
     /**

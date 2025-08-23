@@ -172,10 +172,7 @@
                 <div class="col-lg-12">
                     <div class="center m0-auto w-text-heading mb-40">
                         <p class="text-white mt-5">ABOUT DAFFANA NUSANTARA</p>
-                        <p class="text-white"><strong class="fw-bold">Daffana Nusantara membuat proses
-                                traveling-mu serba simpel dan praktis, sehingga kamu bisa order tiket
-                                pesawat, order room hotel, dan order tiket tur jalan-jalan keliling
-                                Indonesia cukup dari gadgetmu.</strong></p>
+                        <p class="text-white"><strong class="fw-bold">{{ $aboutAs->description }}</strong></p>
                         <div class="mt-4 text-center">
                             <a href="#" class="btn btn-lg rounded-pill"
                                 style="border: 2px solid white; background-color: transparent; color: white;">Explore

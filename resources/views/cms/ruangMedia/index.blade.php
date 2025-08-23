@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12">
-            <div class="card planned_task">
+            <div class="card planned_task  p-4">
                 <div class="header">
                     <h2>Ruang Media</h2>
                     <a href="{{ route('cms.ruang.media.create') }}" class="btn btn-primary float-right">Add Ruang Media</a>
@@ -122,7 +122,7 @@
         $(document).on('click', '.pagination .page-link', function(e) {
             e.preventDefault();
             const page = $(this).data('page');
-            const wilayah_id = $('.nav-link.active').data('id');
+            const wilayah_id = $('.nav-link1.active').data('id');
             if (page) {
                 show(page, wilayah_id);
                 $('html, body').animate({ scrollTop: $('#tablePaket').offset().top - 100 }, 500);
@@ -130,9 +130,9 @@
         });
 
         // Wilayah Click
-        $(document).on('click', '.nav-link', function(e) {
+        $(document).on('click', '.nav-link1', function(e) {
             e.preventDefault();
-            $('.nav-link').removeClass('active');
+            $('.nav-link1').removeClass('active');
             $(this).addClass('active');
             const wilayah_id = $(this).data('id');
             show(1, wilayah_id);

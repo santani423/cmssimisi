@@ -84,7 +84,7 @@
                                                 <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z"/>
                                             </svg>${new Date(item?.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) || 'Unknown'}</span>
                                 <h5 class="entry-title">
-                                    <a href="${'{{ route('paket.show', '') }}'.replace('', item.id)}">${item.title}</a>
+                                    <a href="{{ route('ruang-media.show', '') }}/${item.code}">${item.title}</a>
                                 </h5>
                                 <div class="review" style="max-height: 100px; overflow: hidden; text-overflow: ellipsis;">
                                     ${item.resume || ''}

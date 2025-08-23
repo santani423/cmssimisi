@@ -69,7 +69,7 @@
                                             ${new Date(item?.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) || 'Unknown'}
                                         </span>
                                         <h3 class="title-tour-list">
-                                            <a href="{{ route('paket.show', '') }}/${item.code}">${item.title}</a>
+                                            <a href="{{ route('ruang-media.show', '') }}/${item.code}">${item.title}</a>
                                         </h3>
                                         <div class="review" style="max-height: 100px; overflow: hidden; text-overflow: ellipsis;">
                                              ${item.resume}  

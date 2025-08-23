@@ -23,7 +23,7 @@
     <div class="container-fluid">
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12">
-                <div class="card planned_task">
+                <div class="card planned_task  p-4">
                     <div class="body">
                         <form id="mediaForm" enctype="multipart/form-data">
                             @csrf
@@ -77,6 +77,9 @@
     <script src="{{ asset('admin/assets/vendor/jquery-steps/jquery.steps.js') }}"></script>
     <script src="{{ asset('admin/assets/js/pages/form-wizard.js') }}"></script>
     <script src="{{ asset('admin/assets/vendor/summernote/dist/summernote.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>

@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 
 class TransportasiController extends Controller
 {
-   
+
     public function index(Request $request)
     {
-         
+
         try {
             $page = $request->input('page', 1);
             $size = $request->input('size', 10);
@@ -23,10 +23,27 @@ class TransportasiController extends Controller
                 'wilayah' => $request->input('wilayah_id'),
             ], 200);
         } catch (\Exception $e) {
-                return response()->json([
-                    'message' => 'Failed to retrieve Unit',
-                    'error' => $e->getMessage()
-                ], 500);
+            return response()->json([
+                'message' => 'Failed to retrieve Unit',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function view($id)
+    {
+        try {
+            $data = SewaTransportasi::findOrFail($id);
+
+            return response()->json([
+                'message' => 'Detail Unit',
+                'data' => $data,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Failed to retrieve Unit',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 }

@@ -264,6 +264,8 @@
     <script src="{{ asset('admin/assets/vendor/jquery-steps/jquery.steps.js') }}"></script>
     <script src="{{ asset('admin/assets/js/pages/form-wizard.js') }}"></script>
     <script src="{{ asset('admin/assets/vendor/summernote/dist/summernote.js') }}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         var currentTab = 0; // Current tab is set to be the first tab (0)

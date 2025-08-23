@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\TransportasiController;
 use App\Http\Controllers\Api\TypePaketController;
 use App\Http\Controllers\Api\WilayahController;
 use App\Http\Controllers\Api\OurCleanController;
+use App\Http\Controllers\Api\sewaTransportasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Mockery\Generator\StringManipulation\Pass\Pass;
@@ -63,6 +64,11 @@ Route::get('/our_clean', [OurCleanController::class, 'index'])->name('our_clean.
 Route::get('/our_clean/{id}', [OurCleanController::class, 'show'])->name('our_clean.show'); 
 Route::put('/our_clean/update/{id}', [OurCleanController::class, 'update'])->name('our_clean.update'); 
 Route::delete('/our_clean/{id}', [OurCleanController::class, 'delete'])->name('our_clean.update'); 
+
+Route::get('/sewa_transportasi', [sewaTransportasi::class, 'index'])->name('sewa_transportasi.index'); 
+Route::get('/sewa_transportasi/{id}', [sewaTransportasi::class, 'show'])->name('sewa_transportasi.show'); 
+Route::put('/sewa_transportasi/update/{id}', [sewaTransportasi::class, 'update'])->name('sewa_transportasi.update'); 
+Route::delete('/sewa_transportasi/{id}', [sewaTransportasi::class, 'delete'])->name('sewa_transportasi.delete'); 
 
 
 

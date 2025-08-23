@@ -28,7 +28,9 @@ class HomeController extends Controller
             ->paginate(10);
 
         $ourClean = OurClean::get();
-        return view('home', compact('banner', 'package','paket','ruangMedia','ourClean'));
+        $aboutAs = AboutUs::first();
+        
+        return view('home', compact('banner', 'package','paket','ruangMedia','ourClean', 'aboutAs'));
     }
 
     function abautAs()

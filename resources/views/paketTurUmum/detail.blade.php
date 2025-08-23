@@ -55,9 +55,7 @@
 
                     <div class="mb-30">
                         <div class="extra">
-                            <div class="flex-three">
-                                <span class="name text-secondary">Hotel:</span>
-                            </div>
+                           
                             <div class="flex-three">
                                 <div class="form-group d-flex">
                                     @if ($paket->hotel_bintang_1)
@@ -211,7 +209,7 @@
             message += `🧒 *Anak-anak*: ${children}\n`;
             message += `🏨 *Hotel Bintang*: ${hotelRatingVal ? hotelRatingVal : 'Belum dipilih'}`;
 
-            const phoneNumber = '6285716828111'; // Ganti dengan nomor admin Anda
+            const phoneNumber = @json($setting->phone); // Ganti dengan nomor admin Anda v
             const encodedMessage = encodeURIComponent(message);
             const waUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
