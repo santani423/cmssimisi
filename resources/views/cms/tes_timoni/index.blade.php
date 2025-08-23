@@ -3,26 +3,23 @@
 
 @section('content')
     <div class="container-fluid">
-      
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12">
-                <div class="card planned_task">
+                <div class="card planned_task p-4">
                     <div class="header d-flex justify-content-end">
                         <!-- Tombol memunculkan modal tambah -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTesTimoniModal">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTesTimoniModal">
                             Tambah Tes Timoni
                         </button>
                     </div>
                     <div class="body">
                         <!-- Form Modal Tambah -->
-                        <div class="modal fade" id="addTesTimoniModal" tabindex="-1" role="dialog" aria-labelledby="addTesTimoniModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                        <div class="modal fade" id="addTesTimoniModal" tabindex="-1" aria-labelledby="addTesTimoniModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="addTesTimoniModalLabel">Tambah Tes Timoni</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <form action="{{ route('cms.tes_timoni.store') }}" method="POST">
                                         @csrf
@@ -52,7 +49,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                                             <button type="submit" class="btn btn-primary">Simpan</button>
                                         </div>
                                     </form>
@@ -60,14 +57,14 @@
                             </div>
                         </div>
 
+                        {{-- Notifikasi sukses --}}
                         @if (session('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('success') }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         @endif  
+
                         <h2 class="page-title">Manajemen Tes Timoni</h2>
 
                         <!-- Tabel Data Tes Timoni -->
@@ -95,7 +92,7 @@
                                             <td>{{ $item->is_active ? 'Ya' : 'Tidak' }}</td>
                                             <td>
                                                 <!-- Tombol Edit -->
-                                                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editTesTimoniModal-{{ $item->id }}">
+                                                <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editTesTimoniModal-{{ $item->id }}">
                                                     Edit
                                                 </button>
 
@@ -109,14 +106,12 @@
                                         </tr>
 
                                         <!-- Modal Edit per Item -->
-                                        <div class="modal fade" id="editTesTimoniModal-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="editTesTimoniModalLabel-{{ $item->id }}" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
+                                        <div class="modal fade" id="editTesTimoniModal-{{ $item->id }}" tabindex="-1" aria-labelledby="editTesTimoniModalLabel-{{ $item->id }}" aria-hidden="true">
+                                            <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="editTesTimoniModalLabel-{{ $item->id }}">Edit Tes Timoni</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <form action="{{ route('cms.tes_timoni.update', $item->id) }}" method="POST">
                                                         @csrf
@@ -147,7 +142,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                                                             <button type="submit" class="btn btn-primary">Update</button>
                                                         </div>
                                                     </form>

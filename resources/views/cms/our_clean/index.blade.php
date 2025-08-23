@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12">
-                <div class="card planned_task">
+                <div class="card planned_task p-4">
                     <div class="header d-flex justify-content-between align-items-center">
                         <h2 class="page-title">Manajemen Mitra Kerja Sama</h2>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
@@ -122,7 +122,7 @@
                             <td>${item.contact_person || '-'}</td>
                             <td>${item.email || '-'}</td>
                             <td>${item.phone || '-'}</td>
-                            <td>${status}</td>
+                            <td>${item.is_active == 1 ? 'Aktif' : 'Tidak Aktif'}</td>
                             <td>
                                <button type="button" class="btn btn-primary btn-edit" data-toggle="modal" data-id="${item.id}"  data-target="#editModal">
                             Edit
