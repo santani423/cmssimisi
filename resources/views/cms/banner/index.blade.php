@@ -1,10 +1,10 @@
 @extends('cms.layout.index')
 
 @section('content')
-<div class="container-fluid">
+ 
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12">
-            <div class="card planned_task">
+            <div class="card planned_task p-4">
                 <div class="header">
                     <h2>Banner</h2>
                     <a href="{{ route('cms.banner.create') }}" class="btn btn-primary float-right">Add Banner</a>
@@ -15,9 +15,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Thumbnail</th>
-                                {{-- <th>Nama</th> 
-                                <th>Sub</th>  --}}
+                                <th>Thumbnail</th> 
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -34,7 +32,7 @@
             </div>
         </div>
     </div>
-</div>
+  
 
 <!-- Modal Konfirmasi Hapus -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
@@ -42,15 +40,13 @@
     <div class="modal-content">
       <div class="modal-header bg-danger text-white">
         <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Hapus</h5>
-        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+       
       </div>
       <div class="modal-body">
         Apakah Anda yakin ingin menghapus paket ini?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button> --}}
         <button type="button" class="btn btn-danger" id="deleteConfirmBtn">Hapus</button>
       </div>
     </div>
@@ -59,10 +55,11 @@
 @endsection
 
 @section('script')
+ 
 <script>
     $(document).ready(function() {
         let selectedCode = null;
-
+        
         function show(page = 1, wilayah_id = null) {
             $.ajax({
                 url: '{{ route('banner.index') }}',

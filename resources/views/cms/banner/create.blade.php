@@ -21,7 +21,7 @@
 <div class="container-fluid">
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12">
-            <div class="card planned_task">
+            <div class="card planned_task p-4">
                 <div class="header"> 
                     <h2>Form Tambah Banner</h2>
                 </div>

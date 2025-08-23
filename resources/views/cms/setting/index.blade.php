@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12">
-            <div class="card planned_task">
+            <div class="card planned_task   p-4">
                 <div class="body">
                     <h4>Setting</h4>
                     <form action="{{route('cms.setting.update')}}" method="POST" enctype="multipart/form-data">

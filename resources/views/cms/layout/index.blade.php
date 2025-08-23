@@ -81,6 +81,7 @@
             height: auto;
         }
     </style>
+    @yield('css')
 </head>
 
 <body>
@@ -110,7 +111,7 @@
                         </form>
                     </li>
 
-                   
+
 
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST" class="d-inline">
@@ -127,8 +128,7 @@
     <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="sidebarMenuLabel">Menu Utama</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                aria-label="Close"></button>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <div class="user-info text-center mb-3">
@@ -151,7 +151,8 @@
                     </ul>
                 </li>
 
-                <li><a href="{{ route('cms.sewa_transportasi.index') }}"><i class="ti-gallery"></i> Sewa Kendaraan</a></li>
+                <li><a href="{{ route('cms.sewa_transportasi.index') }}"><i class="ti-gallery"></i> Sewa Kendaraan</a>
+                </li>
                 <li><a href="{{ route('cms.ruang.media') }}"><i class="ti-gallery"></i> Ruang Media</a></li>
 
                 <!-- Dropdown Website -->
@@ -161,11 +162,16 @@
                         <i class="ti-layout"></i> Website
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="websiteDropdown">
-                        <li><a class="dropdown-item" href="{{ route('cms.banner') }}"><i class="ti-image"></i> Banner</a></li>
-                        <li><a class="dropdown-item" href="{{ route('cms.tes_timoni') }}"><i class="ti-image"></i> Testimoni</a></li>
-                        <li><a class="dropdown-item" href="{{ route('cms.our_clean.index') }}"><i class="ti-image"></i> Our Client</a></li>
-                        <li><a class="dropdown-item" href="{{ route('cms.about_us.index') }}"><i class="ti-settings"></i> About Us</a></li>
-                        <li><a class="dropdown-item" href="{{ route('cms.setting') }}"><i class="ti-settings"></i> Setting</a></li>
+                        <li><a class="dropdown-item" href="{{ route('cms.banner') }}"><i class="ti-image"></i>
+                                Banner</a></li>
+                        <li><a class="dropdown-item" href="{{ route('cms.tes_timoni') }}"><i class="ti-image"></i>
+                                Testimoni</a></li>
+                        <li><a class="dropdown-item" href="{{ route('cms.our_clean.index') }}"><i class="ti-image"></i>
+                                Our Client</a></li>
+                        <li><a class="dropdown-item" href="{{ route('cms.about_us.index') }}"><i
+                                    class="ti-settings"></i> About Us</a></li>
+                        <li><a class="dropdown-item" href="{{ route('cms.setting') }}"><i class="ti-settings"></i>
+                                Setting</a></li>
                     </ul>
                 </li>
             </ul>
@@ -178,10 +184,12 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
     @yield('script')
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             // Load Paket into Sidebar Dropdown
             fetch('/api/jenis-paket')
                 .then(response => response.json())
@@ -190,7 +198,8 @@
                     if (data?.data) {
                         let html = '';
                         data.data.forEach(item => {
-                            html += `<li><a class="dropdown-item" href="/cms/paket/jenis-paket/${item.code}">${item.name}</a></li>`;
+                            html +=
+                                `<li><a class="dropdown-item" href="/cms/paket/jenis-paket/${item.code}">${item.name}</a></li>`;
                         });
                         container.innerHTML = html;
                     }

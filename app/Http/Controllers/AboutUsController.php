@@ -63,7 +63,7 @@ class AboutUsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, AboutUs $aboutUs)
+    public function update(Request $request,  $id)
     {
         $validated = $request->validate([
             'video' => 'nullable|string', 
@@ -73,10 +73,10 @@ class AboutUsController extends Controller
             'personal_team' => 'nullable|string|max:255',
             'destinasi_tour' => 'nullable|string|max:255',
         ]);
-
+        $aboutUs = AboutUs::findOrFail($id);
         $aboutUs->update($validated);
 
-        return redirect()->route('about_us.index')->with('success', 'Data berhasil diperbarui.');
+        return redirect()->route('cms.about_us.index')->with('success', 'Data berhasil diperbarui.');
     }
 
     /**
