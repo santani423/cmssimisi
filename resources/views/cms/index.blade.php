@@ -1,4 +1,4 @@
-@extends('cms.layout.index2')
+@extends('cms.layout.index')
 
 @section('content')
 
