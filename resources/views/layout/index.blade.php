@@ -255,7 +255,7 @@
 
                             item.typePakets.forEach(function(type) {
                                 html += `<li>
-                                <a class="dropdown-item" href="/paket_jenis?type_paket=${type.code}&jenis_paket=${item.jenisPaket}">
+                                <a class="dropdown-item" href="/paket_jenis?type_paket=${type.code}&jenis_paket=${item.code}">
                                     ${type.name}
                                 </a>
                              </li>`;
@@ -265,7 +265,7 @@
                         } else {
                             // jika tidak ada typePaket → tampilkan sebagai menu biasa
                             html +=
-                                `<li><a href="/paket_jenis?jenis_paket=${item.jenisPaket}" class="nav-link active">${item.jenisPaket}</a></li>`;
+                                `<li><a href="/paket_jenis?jenis_paket=${item.code}" class="nav-link active">${item.jenisPaket}</a></li>`;
                         }
                     });
 

@@ -54,6 +54,7 @@ class JenisPaketController extends Controller
                 'data' => $jenisPakets->map(function ($jenis) {
                     return [
                         'jenisPaket' => $jenis->name,
+                        'code' => $jenis->code,
                         'typePakets' => $jenis->typePakets->map(function ($type) {
                             return [
                                 'id' => $type->id,

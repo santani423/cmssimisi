@@ -22,6 +22,7 @@ class PaketTurUmumController extends Controller
         $jenisPaket = JenisPaket::where('code', $request->jenis_paket)->first();
         $typePaket = TypePaket::where('code', $request->type_paket)->first();
         $wilayah_id = $request->wilayah_id ?? '';
+        // dd($wilayah, $jenisPaket, $typePaket, $wilayah_id);
         return view('paketTurUmum.index', compact('wilayah', 'jenisPaket', 'typePaket', 'wilayah_id'));
     }
 
