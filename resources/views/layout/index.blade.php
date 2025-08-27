@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US">
+
 <head>
     <meta charset="utf-8">
     <title id="title">Daffana Nusantara</title>
@@ -10,9 +11,31 @@
     <link rel="stylesheet" href="{{ asset('vitour/app/css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('vitour/app/css/jquery.fancybox.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vitour/app/css/textanimation.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
     @yield('css')
+    <!-- Matomo -->
+    <script>
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+            var u = "//matomo.daffananusantara.com/";
+            _paq.push(['setTrackerUrl', u + 'matomo.php']);
+            _paq.push(['setSiteId', '1']);
+            var d = document,
+                g = d.createElement('script'),
+                s = d.getElementsByTagName('script')[0];
+            g.async = true;
+            g.src = u + 'matomo.js';
+            s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <!-- End Matomo Code -->
+
 </head>
+
 <body class="body header-fixed counter-scroll">
     <div id="wrapper">
         <div id="pagee" class="clearfix">
@@ -31,22 +54,28 @@
                                 aria-label="Toggle navigation" style="margin: 16px;">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-                            <div class="collapse navbar-collapse justify-content-end" id="navbarNav" style="margin-left: 16px;">
+                            <div class="collapse navbar-collapse justify-content-end" id="navbarNav"
+                                style="margin-left: 16px;">
                                 <ul class="navbar-nav mb-2 mb-lg-0 ml-2" id="main-navbar">
-                                    <li><a href="{{ route('home') }}" class="nav-link active" aria-current="page">Beranda</a></li>
+                                    <li><a href="{{ route('home') }}" class="nav-link active"
+                                            aria-current="page">Beranda</a></li>
                                     <li class="nav-item dropdown" id="paketDropdownWrapper">
                                         <a class="nav-link dropdown-toggle active" href="#" id="paketDropdown"
                                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Paket 
+                                            Paket
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="paketDropdown">
                                             <li><a class="dropdown-item" href="#">Paket Domestik</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="{{ route('ruang-media.index') }}" class="nav-link active" aria-current="page">Ruang Media</a></li>
-                                    <li><a href="{{ route('sewa.transportasi') }}" class="nav-link active" aria-current="page">Sewa Transportasi</a></li>
-                                    <li><a href="{{ route('tes.timoni') }}" class="nav-link active" aria-current="page">Testimoni</a></li>
-                                    <li><a href="{{ route('about.as') }}" class="nav-link active" aria-current="page">Tentang Kami</a></li>
+                                    <li><a href="{{ route('ruang-media.index') }}" class="nav-link active"
+                                            aria-current="page">Ruang Media</a></li>
+                                    <li><a href="{{ route('sewa.transportasi') }}" class="nav-link active"
+                                            aria-current="page">Sewa Transportasi</a></li>
+                                    <li><a href="{{ route('tes.timoni') }}" class="nav-link active"
+                                            aria-current="page">Testimoni</a></li>
+                                    <li><a href="{{ route('about.as') }}" class="nav-link active"
+                                            aria-current="page">Tentang Kami</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -88,12 +117,18 @@
                             <div class="col-md-2">
                                 <h5 class="title">Navigation</h5>
                                 <ul class="footer-menu text-white">
-                                    <li><a href="/" class="text-white" style="text-decoration: none;">Home</a></li>
-                                    <li><a href="{{ route('paket.index') }}" class="text-white" style="text-decoration: none;">Paket Tur</a></li>
-                                    <li><a href="{{ route('ruang-media.index') }}" class="text-white" style="text-decoration: none;">Ruang Media</a></li>
-                                    <li><a href="{{ route('sewa.transportasi') }}" class="text-white" style="text-decoration: none;">Sewa Transportasi</a></li>
-                                    <li><a href="{{ route('tes.timoni') }}" class="text-white" style="text-decoration: none;">Testimoni</a></li>
-                                    <li><a href="{{ route('about.as') }}" class="text-white" style="text-decoration: none;">Tentang Kami</a></li>
+                                    <li><a href="/" class="text-white" style="text-decoration: none;">Home</a>
+                                    </li>
+                                    <li><a href="{{ route('paket.index') }}" class="text-white"
+                                            style="text-decoration: none;">Paket Tur</a></li>
+                                    <li><a href="{{ route('ruang-media.index') }}" class="text-white"
+                                            style="text-decoration: none;">Ruang Media</a></li>
+                                    <li><a href="{{ route('sewa.transportasi') }}" class="text-white"
+                                            style="text-decoration: none;">Sewa Transportasi</a></li>
+                                    <li><a href="{{ route('tes.timoni') }}" class="text-white"
+                                            style="text-decoration: none;">Testimoni</a></li>
+                                    <li><a href="{{ route('about.as') }}" class="text-white"
+                                            style="text-decoration: none;">Tentang Kami</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-2">
@@ -110,7 +145,8 @@
                     </div>
                     <div class="row footer-bottom">
                         <div class="col-md-12 text-center">
-                            <p class="copy-right">Copyright © 2025 Daffana Nusantara - Powered by <a href="https://toffeltechasia.com" class="text-main">Toffel Tech Asia</a></p>
+                            <p class="copy-right">Copyright © 2025 Daffana Nusantara - Powered by <a
+                                    href="https://toffeltechasia.com" class="text-main">Toffel Tech Asia</a></p>
                         </div>
                     </div>
                 </div>
@@ -120,8 +156,10 @@
 
     <div id="whatsapp"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+    </script>
     <script src="{{ asset('vitour/app/js/jquery.min.js') }}"></script>
     <script src="{{ asset('vitour/app/js/jquery.nice-select.min.js') }}"></script>
     <script src="{{ asset('vitour/app/js/swiper-bundle.min.js') }}"></script>
@@ -148,36 +186,37 @@
                     $('#addres').html(settings.address || '-');
                     $('#phone').html(settings.phone || '-');
                     $('#email').html(
-                        settings.email
-                        ? `<a href="mailto:${settings.email}" class="flex-three text-white" style="text-decoration: none;">
+                        settings.email ?
+                        `<a href="mailto:${settings.email}" class="flex-three text-white" style="text-decoration: none;">
                                 <img src="{{ asset('assets/item/email.png') }}" style="width: 30px;" class="ml-2" alt="">
                                 ${settings.email}
-                            </a>`
-                        : '-'
+                            </a>` :
+                        '-'
                     );
                     $('#instagram').html(
-                        settings.instagram
-                        ? `<a href="${settings.instagram}" target="_blank" class="flex-three text-white" style="text-decoration: none;">
+                        settings.instagram ?
+                        `<a href="${settings.instagram}" target="_blank" class="flex-three text-white" style="text-decoration: none;">
                                 <img src="{{ asset('assets/item/instagram.png') }}" style="width: 30px;" class="ml-2" alt="">
-                            </a>`
-                        : ''
+                            </a>` :
+                        ''
                     );
                     $('#tiktok').html(
-                        settings.tiktok
-                        ? `<a href="${settings.tiktok}" target="_blank" class="flex-three text-white" style="text-decoration: none;">
+                        settings.tiktok ?
+                        `<a href="${settings.tiktok}" target="_blank" class="flex-three text-white" style="text-decoration: none;">
                                 <img src="{{ asset('assets/item/tiktok.png') }}" style="width: 30px;" class="ml-2" alt="">
-                            </a>`
-                        : ''
+                            </a>` :
+                        ''
                     );
                     $('#youtube').html(
-                        settings.youtube
-                        ? `<a href="${settings.youtube}" target="_blank" class="flex-three text-white" style="text-decoration: none;">
+                        settings.youtube ?
+                        `<a href="${settings.youtube}" target="_blank" class="flex-three text-white" style="text-decoration: none;">
                                 <img src="{{ asset('assets/item/youtube.png') }}" style="width: 40px;" class="ml-2" alt="">
-                            </a>`
-                        : ''
+                            </a>` :
+                        ''
                     );
                     if (settings.whatsapp) {
-                        let whatsappNumber = settings.whatsapp.startsWith('0') ? '62' + settings.whatsapp.substring(1) : settings.whatsapp;
+                        let whatsappNumber = settings.whatsapp.startsWith('0') ? '62' + settings.whatsapp
+                            .substring(1) : settings.whatsapp;
                         $('#whatsapp').html(
                             `<a href="https://wa.me/${whatsappNumber}" target="_blank">
                                 <img src="{{ asset('assets/item/logos_whatsapp-icon.png') }}" alt="WhatsApp" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; width: 60px; height: 60px;">
@@ -185,7 +224,8 @@
                         );
                     }
                     if (settings.logo) {
-                        $('#logo-footer').html(`<img src="{{ asset('') }}${settings.logo}" alt="Logo Footer">`);
+                        $('#logo-footer').html(
+                            `<img src="{{ asset('') }}${settings.logo}" alt="Logo Footer">`);
                     }
                     if (settings.favicon) {
                         $('#favico').attr('href', `{{ asset('') }}${settings.favicon}`);
@@ -202,8 +242,8 @@
                 }).done(function(response) {
                     let jenisPaket = (response.data && response.data) ? response.data : [];
                     let typePaket = (response.data && response.typePakets) ? response.typePakets : [];
-                    console.log('typePaket',jenisPaket);
-                    
+                    console.log('typePaket', jenisPaket);
+
                     let html = '';
                     jenisPaket.forEach(function(type) {
                         html += `<li class="nav-item dropdown">
@@ -213,7 +253,8 @@
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="paketDropdown${type.id}">`;
                         (typePaket || []).forEach(function(paket) {
-                            html += `<li><a class="dropdown-item" href="/paket_jenis?type_paket=${paket.code}&jenis_paket=${type.code}">${paket.name}</a></li>`;
+                            html +=
+                                `<li><a class="dropdown-item" href="/paket_jenis?type_paket=${paket.code}&jenis_paket=${type.code}">${paket.name}</a></li>`;
                         });
                         html += `</ul></li>`;
                     });
@@ -231,4 +272,5 @@
     </script>
     @yield('script')
 </body>
+
 </html>
