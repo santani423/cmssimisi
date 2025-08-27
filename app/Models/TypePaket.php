@@ -22,4 +22,14 @@ class TypePaket extends Model
     {
         return DB::table('pakets')->where('type_paket_id', $this->id)->get();
     }
+
+       public function jenisPakets()
+    {
+        return $this->belongsToMany(
+            JenisPaket::class,
+            'pakets',           // pivot table
+            'type_paket_id',    // foreign key di pivot yg mengacu ke type_pakets
+            'jenis_paket_id'    // foreign key di pivot yg mengacu ke jenis_pakets
+        )->distinct();
+    }
 }

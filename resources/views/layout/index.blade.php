@@ -237,34 +237,48 @@
 
             function paket() {
                 $.ajax({
-                    url: '{{ route('paket.jenis-paket') }}',
+                    url: '{{ route('paket.jenis-paket.menu') }}',
                     method: 'GET',
                 }).done(function(response) {
-                    let jenisPaket = (response.data && response.data) ? response.data : [];
-                    let typePaket = (response.data && response.typePakets) ? response.typePakets : [];
-                    console.log('typePaket', jenisPaket);
+                    let data = (response.data && response.data) ? response.data : [];
 
                     let html = '';
-                    jenisPaket.forEach(function(type) {
-                        html += `<li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle active" href="#" id="paketDropdown${type.id}"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        ${type.name}
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="paketDropdown${type.id}">`;
-                        (typePaket || []).forEach(function(paket) {
+                    data.forEach(function(item, index) {
+                        if (item.typePakets && item.typePakets.length > 0) {
+                            // jika ada typePakets, jadikan dropdown
+                            html += `<li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" id="jenisDropdown${index}"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                ${item.jenisPaket}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="jenisDropdown${index}">`;
+
+                            item.typePakets.forEach(function(type) {
+                                html += `<li>
+                                <a class="dropdown-item" href="/paket_jenis?type_paket=${type.code}&jenis_paket=${item.jenisPaket}">
+                                    ${type.name}
+                                </a>
+                             </li>`;
+                            });
+
+                            html += `</ul></li>`;
+                        } else {
+                            // jika tidak ada typePaket → tampilkan sebagai menu biasa
                             html +=
-                                `<li><a class="dropdown-item" href="/paket_jenis?type_paket=${paket.code}&jenis_paket=${type.code}">${paket.name}</a></li>`;
-                        });
-                        html += `</ul></li>`;
+                                `<li><a href="/paket_jenis?jenis_paket=${item.jenisPaket}" class="nav-link active">${item.jenisPaket}</a></li>`;
+                        }
                     });
-                    if (html) {
-                        $('#paketDropdownWrapper').replaceWith(html);
-                    }
+
+                    // ganti isi wrapper paket dengan menu baru
+                    $('#paketDropdownWrapper').replaceWith(html);
                 }).fail(function(xhr, status, error) {
                     console.error('Error:', error);
                 });
             }
+
+
+
+
 
             paket();
             show();

@@ -58,6 +58,7 @@ Route::put('/banner/{ruangMedia}', [BannerController::class, 'update'])->name('b
 Route::delete('/banner/{ruangMedia}', [BannerController::class, 'destroy'])->name('banner.destroy'); 
 
 Route::get('/jenis-paket', [JenisPaketController::class, 'index'])->name('paket.jenis-paket');
+Route::get('/jenis-paket/menu', [JenisPaketController::class, 'menuPaket'])->name('paket.jenis-paket.menu');
 
 
 Route::get('/our_clean', [OurCleanController::class, 'index'])->name('our_clean.index'); 
