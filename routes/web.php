@@ -7,6 +7,7 @@ use App\Http\Controllers\CmsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OurCleanController;
 use App\Http\Controllers\PaketTurUmumController;
+use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RuangMediaController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SewaTransportasiController;
@@ -80,6 +81,10 @@ Route::middleware('auth')->group(function () {
             Route::resource('sewa_transportasi', SewaTransportasiController::class);
             Route::resource('about_us', AboutUsController::class);
         });
+
+    Route::get('/cms/program', [ProgramController::class, 'index'])->name('cms.program');
+    Route::get('/cms/program/create', [ProgramController::class, 'create'])->name('cms.program.create');
+    Route::get('/cms/program/edit/{program}', [ProgramController::class, 'edit'])->name('cms.program.edit');
 
 
 

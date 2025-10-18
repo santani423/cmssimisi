@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\TransportasiController;
 use App\Http\Controllers\Api\TypePaketController;
 use App\Http\Controllers\Api\WilayahController;
 use App\Http\Controllers\Api\OurCleanController;
+use App\Http\Controllers\Api\ProgramController;
 use App\Http\Controllers\Api\sewaTransportasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -70,6 +71,11 @@ Route::get('/sewa_transportasi', [sewaTransportasi::class, 'index'])->name('sewa
 Route::get('/sewa_transportasi/{id}', [sewaTransportasi::class, 'show'])->name('sewa_transportasi.show'); 
 Route::put('/sewa_transportasi/update/{id}', [sewaTransportasi::class, 'update'])->name('sewa_transportasi.update'); 
 Route::delete('/sewa_transportasi/{id}', [sewaTransportasi::class, 'delete'])->name('sewa_transportasi.delete'); 
+
+Route::get('/program', [ProgramController::class, 'index'])->name('program.index'); 
+Route::get('/program/{id}', [ProgramController::class, 'show'])->name('program.show'); 
+Route::put('/program/update/{id}', [ProgramController::class, 'update'])->name('program.update'); 
+Route::delete('/program/{id}', [ProgramController::class, 'delete'])->name('program.delete'); 
 
 
 
