@@ -12,7 +12,7 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        //
+        return view('cms.program.index');
     }
 
     /**
@@ -20,7 +20,7 @@ class ProgramController extends Controller
      */
     public function create()
     {
-        //
+          return view('cms.program.create');
     }
 
     /**

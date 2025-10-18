@@ -154,6 +154,7 @@
                 <li><a href="{{ route('cms.sewa_transportasi.index') }}"><i class="ti-gallery"></i> Sewa Kendaraan</a>
                 </li>
                 <li><a href="{{ route('cms.ruang.media') }}"><i class="ti-gallery"></i> Ruang Media</a></li>
+                <li><a href="{{ route('cms.program') }}"><i class="ti-gallery"></i> Program</a></li>
 
                 <!-- Dropdown Website -->
                 <li class="nav-item dropdown">
