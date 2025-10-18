@@ -75,8 +75,8 @@ Route::delete('/sewa_transportasi/{id}', [sewaTransportasi::class, 'delete'])->n
 Route::get('/program', [ProgramController::class, 'index'])->name('program.index'); 
 Route::post('/program', [ProgramController::class, 'store'])->name('program.store');
 Route::get('/program/{id}', [ProgramController::class, 'show'])->name('program.show'); 
-Route::put('/program/update/{id}', [ProgramController::class, 'update'])->name('program.update'); 
-Route::delete('/program/{id}', [ProgramController::class, 'delete'])->name('program.delete'); 
+Route::put('/program/{id}', [ProgramController::class, 'update'])->name('program.update'); 
+Route::delete('/program/{id}', [ProgramController::class, 'destroy'])->name('program.delete'); 
 
 
 

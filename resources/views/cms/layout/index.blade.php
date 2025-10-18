@@ -139,42 +139,10 @@
             <ul id="main-menu" class="list-unstyled">
                 <li class="g_heading">Main</li>
                 <li><a href="{{ route('cms') }}"><i class="ti-dashboard"></i> Dashboard</a></li>
+                <li><a href="{{ route('cms.program') }}"><i class="ti-gallery"></i> Program</a></li> 
+                <li><a href="{{ route('cms.our_clean.index') }}"><i class="ti-gallery"></i> Our Clean</a></li> 
+                <li><a href="{{ route('cms.setting') }}"><i class="ti-gallery"></i> Setting</a></li>
 
-                <!-- Dropdown Paket -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="paketDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="ti-package"></i> Paket
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="paketDropdown" id="nav-paket-list">
-                        <!-- list jenis paket dimuat via JS -->
-                    </ul>
-                </li>
-
-                <li><a href="{{ route('cms.sewa_transportasi.index') }}"><i class="ti-gallery"></i> Sewa Kendaraan</a>
-                </li>
-                <li><a href="{{ route('cms.ruang.media') }}"><i class="ti-gallery"></i> Ruang Media</a></li>
-                <li><a href="{{ route('cms.program') }}"><i class="ti-gallery"></i> Program</a></li>
-
-                <!-- Dropdown Website -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="websiteDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="ti-layout"></i> Website
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="websiteDropdown">
-                        <li><a class="dropdown-item" href="{{ route('cms.banner') }}"><i class="ti-image"></i>
-                                Banner</a></li>
-                        <li><a class="dropdown-item" href="{{ route('cms.tes_timoni') }}"><i class="ti-image"></i>
-                                Testimoni</a></li>
-                        <li><a class="dropdown-item" href="{{ route('cms.our_clean.index') }}"><i class="ti-image"></i>
-                                Our Client</a></li>
-                        <li><a class="dropdown-item" href="{{ route('cms.about_us.index') }}"><i
-                                    class="ti-settings"></i> About Us</a></li>
-                        <li><a class="dropdown-item" href="{{ route('cms.setting') }}"><i class="ti-settings"></i>
-                                Setting</a></li>
-                    </ul>
-                </li>
             </ul>
         </div>
     </div>

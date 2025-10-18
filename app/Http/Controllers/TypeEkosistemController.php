@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Program;
+use App\Models\TypeEkosistem;
 use Illuminate\Http\Request;
 
-class ProgramController extends Controller
+class TypeEkosistemController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('cms.program.index');
+        //
     }
 
     /**
@@ -20,7 +20,7 @@ class ProgramController extends Controller
      */
     public function create()
     {
-          return view('cms.program.create');
+        //
     }
 
     /**
@@ -34,7 +34,7 @@ class ProgramController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Program $program)
+    public function show(TypeEkosistem $typeEkosistem)
     {
         //
     }
@@ -42,15 +42,15 @@ class ProgramController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(TypeEkosistem $typeEkosistem)
     {
-        return view('cms.program.edit', compact('id'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Program $program)
+    public function update(Request $request, TypeEkosistem $typeEkosistem)
     {
         //
     }
@@ -58,7 +58,7 @@ class ProgramController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Program $program)
+    public function destroy(TypeEkosistem $typeEkosistem)
     {
         //
     }

@@ -1,38 +1,38 @@
 @extends('cms.layout.index')
 
 @section('content')
- 
-    <div class="row clearfix">
-        <div class="col-lg-12 col-md-12">
-            <div class="card planned_task p-4">
-                <div class="header">
-                    <h2>Program</h2>
-                    <a href="{{ route('cms.program.create') }}" class="btn btn-primary float-right">Add Program</a>
-                </div>
-                <div class="body">
-               
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Thumbnail</th> 
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablePaket">
-                            <!-- Data will be dynamically loaded here -->
-                        </tbody>
-                    </table>
-                    <nav>
-                        <ul class="pagination justify-content-center">
-                            <!-- Pagination links will be dynamically loaded here -->
-                        </ul>
-                    </nav>
-                </div>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12">
+        <div class="card planned_task p-4">
+            <div class="header d-flex justify-content-between align-items-center">
+                <h2>Program</h2>
+                <a href="{{ route('cms.program.create') }}" class="btn btn-primary">Add Program</a>
+            </div>
+            <div class="body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Program</th>
+                            <th>Deskripsi</th>
+                            <th>PDF</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableProgram">
+                        <!-- Data will be dynamically loaded here -->
+                    </tbody>
+                </table>
+
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <!-- Pagination links will be dynamically loaded here -->
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
-  
+</div>
 
 <!-- Modal Konfirmasi Hapus -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
@@ -40,13 +40,11 @@
     <div class="modal-content">
       <div class="modal-header bg-danger text-white">
         <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Hapus</h5>
-       
       </div>
       <div class="modal-body">
-        Apakah Anda yakin ingin menghapus paket ini?
+        Apakah Anda yakin ingin menghapus program ini?
       </div>
       <div class="modal-footer">
-        {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button> --}}
         <button type="button" class="btn btn-danger" id="deleteConfirmBtn">Hapus</button>
       </div>
     </div>
@@ -55,41 +53,43 @@
 @endsection
 
 @section('script')
- 
 <script>
     $(document).ready(function() {
-        let selectedCode = null;
-        
-        function show(page = 1, wilayah_id = null) {
+        let selectedId = null;
+
+        function show(page = 1) {
             $.ajax({
-                url: '{{ route('banner.index') }}',
+                url: `/api/program?page=${page}`,
                 method: 'GET',
-                data: {
-                    page: page,
-                    wilayah_id: wilayah_id, 
-                },
             }).done(function(response) {
-                const data = response?.data?.data || [];
+                const data = response || [];
                 const currentPage = response?.data?.current_page || 1;
                 const lastPage = response?.data?.last_page || 1;
-                const container = $('#tablePaket');
+                const container = $('#tableProgram');
                 container.empty();
 
                 if (data.length === 0) {
-                    container.append('<tr><td colspan="10" class="text-center">No data available</td></tr>');
+                    container.append('<tr><td colspan="5" class="text-center">No data available</td></tr>');
                 } else {
                     data.forEach(function(item, index) {
+                        const deskripsiText = item.deskripsi
+                            ? item.deskripsi.replace(/(<([^>]+)>)/gi, "").substring(0, 80) + '...'
+                            : '-';
+                        const pdfLink = item.pdf_path 
+                            ? `<a href="/storage/${item.pdf_path}" target="_blank" class="text-primary">Lihat PDF</a>`
+                            : '-';
+
                         const html = `
                             <tr>
                                 <td>${(currentPage - 1) * data.length + index + 1}</td>
-                                <td><img src="/${item.image_path || '{{ asset('assets/item/Maskgroup.png') }}'}" alt="thumbnail_img" width="100"></td>
-                                
+                                <td>${item.nama_program || '-'}</td>
+                                <td>${deskripsiText}</td>
+                                <td>${pdfLink}</td>
                                 <td>
-                                    <a href="/cms/Banner/edit/${item.code || '#'}" class="btn btn-primary">Edit</a>
-                                    
-                                    <button class="btn btn-danger btn-delete" data-code="${item.code}">Hapus</button>
+                                    <a href="/cms/program/edit/${item.id}" class="btn btn-sm btn-primary">Edit</a>
+                                    <button class="btn btn-sm btn-danger btn-delete" data-id="${item.id}">Hapus</button>
                                 </td>
-                            </tr>`; 
+                            </tr>`;
                         container.append(html);
                     });
                 }
@@ -120,42 +120,31 @@
         $(document).on('click', '.pagination .page-link', function(e) {
             e.preventDefault();
             const page = $(this).data('page');
-            const wilayah_id = $('.nav-link.active').data('id');
             if (page) {
-                show(page, wilayah_id);
-                $('html, body').animate({ scrollTop: $('#tablePaket').offset().top - 100 }, 500);
+                show(page);
+                $('html, body').animate({ scrollTop: $('#tableProgram').offset().top - 100 }, 500);
             }
-        });
-
-        // Wilayah Click
-        $(document).on('click', '.nav-link', function(e) {
-            e.preventDefault();
-            $('.nav-link').removeClass('active');
-            $(this).addClass('active');
-            const wilayah_id = $(this).data('id');
-            show(1, wilayah_id);
-            $('html, body').animate({ scrollTop: $('#tablePaket').offset().top - 100 }, 500);
         });
 
         // Delete Button Click
         $(document).on('click', '.btn-delete', function() {
-            selectedCode = $(this).data('code');
+            selectedId = $(this).data('id');
             $('#confirmDeleteModal').modal('show');
         });
 
         // Confirm Delete
         $('#deleteConfirmBtn').on('click', function() {
-            if (selectedCode) {
+            if (selectedId) {
                 $.ajax({
-                    url: `/api/banner/${selectedCode}`,
-                    method: 'delete',
+                    url: `/api/program/${selectedId}`,
+                    method: 'DELETE',
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
                     success: function(response) {
                         $('#confirmDeleteModal').modal('hide');
                         show();
-                        selectedCode = null;
+                        selectedId = null;
                     },
                     error: function(err) {
                         console.error('Delete failed:', err);
