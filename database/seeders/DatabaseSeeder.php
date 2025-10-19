@@ -33,5 +33,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TesTimoniSeeder::class);
         $this->call(TransportasiSeeder::class);
         $this->call(TypeEkosistemSeeder::class);
+        $this->call(ProgramsTableSeeder::class);
     }
 }
