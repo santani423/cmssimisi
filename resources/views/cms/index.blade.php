@@ -2,7 +2,7 @@
 
 @section('content')
 
-<style>
+{{-- <style>
     .dashboard-card {
         border-radius: 16px;
         box-shadow: 0 4px 24px rgba(0,0,0,0.08);
@@ -75,6 +75,6 @@
 </div>
 
 <!-- Font Awesome CDN for icons (if not already included) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> --}}
 
 @endsection
