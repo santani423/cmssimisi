@@ -30,7 +30,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('home');
 Route::get('/paket_jenis', [PaketTurUmumController::class, 'index'])->name('paket_jenis');
 Route::resource('paket', PaketTurUmumController::class);
 Route::resource('ruang-media', RuangMediaController::class);
